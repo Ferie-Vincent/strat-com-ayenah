@@ -2141,6 +2141,8 @@
         }
 
         /* ==================== RESPONSIVE ==================== */
+
+        /* Large Desktop (1400px+) */
         @media (max-width: 1400px) {
             .cover-main { padding-right: 400px; }
             .cover-image-feature { width: 320px; height: 320px; right: 3%; }
@@ -2148,6 +2150,7 @@
             .cover-float-img-1, .cover-float-img-2 { display: none; }
         }
 
+        /* Desktop / Tablette paysage (1200px) */
         @media (max-width: 1200px) {
             .cover-main { padding-right: 0; text-align: center; align-items: center; }
             .cover-main-title { font-size: 3.5rem; }
@@ -2160,24 +2163,268 @@
             .ecosystem-grid { grid-template-columns: repeat(3, 1fr); }
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
             .kpis-grid { grid-template-columns: repeat(2, 1fr); }
+
+            .slide-header { padding: 20px 40px; }
+            .slide-footer { padding: 20px 40px; gap: 30px; }
         }
 
+        /* Tablette (1024px) */
+        @media (max-width: 1024px) {
+            .slide-content { padding: 100px 50px 100px; }
+            .section-title { font-size: 2.2rem; }
+            .section-subtitle { font-size: 1rem; }
+
+            .slide-header { padding: 15px 30px; }
+            .logo-left img, .logo-right img { height: 40px; }
+
+            .slide-footer { gap: 25px; padding: 15px 30px; }
+            .slide-footer img { height: 32px; }
+
+            .nav-extra-buttons { gap: 8px; }
+            .nav-extra-btn { width: 40px; height: 40px; font-size: 0.9rem; }
+
+            .sommaire-content { width: 90%; max-width: 500px; }
+
+            .cover-stats-row { flex-wrap: wrap; justify-content: center; }
+        }
+
+        /* Tablette portrait / Mobile large (768px) */
         @media (max-width: 768px) {
-            .slide-content { padding: 100px 30px 90px; }
-            .section-title { font-size: 2rem; }
+            .slide-content { padding: 90px 25px 80px; }
+            .section-title { font-size: 1.8rem; }
+            .section-subtitle { font-size: 0.95rem; }
+
             .cover-main-title { font-size: 2.5rem; }
             .cover-main-title .line-1 { font-size: 1.3rem; letter-spacing: 3px; }
-            .cover-tagline { font-size: 1.1rem; }
-            .cover-stats-row { gap: 10px; }
-            .cover-stat-item { padding: 15px 20px; min-width: 100px; }
-            .cover-stat-value { font-size: 1.6rem; }
-            .cards-grid-2x2 { grid-template-columns: 1fr; }
+            .cover-main-title .line-2 { font-size: 2.2rem; }
+            .cover-tagline { font-size: 1rem; padding: 0 15px; }
+            .cover-top-badge { font-size: 0.8rem; padding: 10px 20px; }
+
+            .cover-stats-row { gap: 8px; flex-wrap: wrap; }
+            .cover-stat-item { padding: 12px 15px; min-width: 90px; }
+            .cover-stat-value { font-size: 1.4rem; }
+            .cover-stat-label { font-size: 0.7rem; }
+
+            .slide-header { padding: 12px 20px; }
+            .logo-left img, .logo-right img { height: 35px; }
+
+            .slide-footer {
+                gap: 15px;
+                padding: 12px 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .slide-footer img { height: 28px; }
+
+            .nav-extra-buttons {
+                top: auto;
+                bottom: 100px;
+                right: 10px;
+                gap: 6px;
+            }
+            .nav-extra-btn { width: 36px; height: 36px; font-size: 0.85rem; }
+
+            .slide-indicators {
+                bottom: 60px;
+                gap: 6px;
+            }
+            .indicator { width: 8px; height: 8px; }
+
+            .cards-grid-2x2 { grid-template-columns: 1fr; gap: 15px; }
             .timeline { flex-direction: column; }
             .timeline::before { display: none; }
             .budget-container { flex-direction: column; }
-            .ecosystem-grid { grid-template-columns: repeat(2, 1fr); }
+            .ecosystem-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
             .governance-grid { grid-template-columns: 1fr; }
             .kpis-grid { grid-template-columns: 1fr; }
+            .targets-grid { grid-template-columns: 1fr; gap: 15px; }
+            .stats-grid { grid-template-columns: 1fr; gap: 15px; }
+
+            .download-btn { padding: 14px 25px; font-size: 1rem; }
+
+            .sommaire-content { width: 95%; padding: 20px; }
+            .sommaire-title { font-size: 1.3rem; }
+            .sommaire-item { padding: 12px 15px; font-size: 0.9rem; }
+        }
+
+        /* Mobile moyen (576px) */
+        @media (max-width: 576px) {
+            .slide-content { padding: 80px 15px 70px; }
+            .section-title { font-size: 1.5rem; }
+            .section-subtitle { font-size: 0.85rem; }
+
+            .cover-main-title { font-size: 2rem; }
+            .cover-main-title .line-1 { font-size: 1.1rem; letter-spacing: 2px; }
+            .cover-main-title .line-2 { font-size: 1.8rem; }
+            .cover-tagline { font-size: 0.9rem; line-height: 1.5; }
+            .cover-top-badge {
+                font-size: 0.75rem;
+                padding: 8px 15px;
+                gap: 8px;
+            }
+
+            .cover-stats-row {
+                gap: 6px;
+                justify-content: center;
+            }
+            .cover-stat-item {
+                padding: 10px 12px;
+                min-width: 80px;
+                border-radius: 12px;
+            }
+            .cover-stat-value { font-size: 1.2rem; }
+            .cover-stat-label { font-size: 0.65rem; }
+
+            .slide-header { padding: 10px 15px; }
+            .logo-left img, .logo-right img { height: 30px; }
+
+            .slide-footer {
+                gap: 10px;
+                padding: 10px 15px;
+            }
+            .slide-footer img { height: 24px; }
+
+            .nav-extra-buttons {
+                right: 8px;
+                bottom: 90px;
+                gap: 5px;
+            }
+            .nav-extra-btn { width: 32px; height: 32px; font-size: 0.8rem; }
+
+            .slide-indicators {
+                bottom: 50px;
+                gap: 5px;
+            }
+            .indicator { width: 6px; height: 6px; }
+
+            .pillar { padding: 20px; }
+            .ecosystem-grid { grid-template-columns: 1fr; }
+
+            .download-btn {
+                padding: 12px 20px;
+                font-size: 0.9rem;
+                gap: 10px;
+            }
+            .download-btn i { font-size: 1.1rem; }
+
+            .sommaire-content {
+                width: 100%;
+                height: 100%;
+                border-radius: 0;
+                padding: 15px;
+            }
+            .sommaire-item { padding: 10px 12px; font-size: 0.85rem; }
+
+            /* Decorative elements - reduce on mobile */
+            .decor-element { opacity: 0.03; }
+            .orb { filter: blur(80px); }
+            .geo-shape { display: none; }
+        }
+
+        /* Petit mobile (480px) */
+        @media (max-width: 480px) {
+            .slide-content { padding: 75px 12px 65px; }
+            .section-title { font-size: 1.3rem; }
+            .section-subtitle { font-size: 0.8rem; }
+
+            .cover-main-title { font-size: 1.7rem; }
+            .cover-main-title .line-1 { font-size: 0.95rem; letter-spacing: 1px; }
+            .cover-main-title .line-2 { font-size: 1.5rem; }
+            .cover-tagline {
+                font-size: 0.85rem;
+                padding: 0 10px;
+                line-height: 1.4;
+            }
+            .cover-top-badge {
+                font-size: 0.7rem;
+                padding: 6px 12px;
+                margin-bottom: 25px;
+            }
+
+            .cover-stats-row {
+                flex-direction: column;
+                gap: 8px;
+                width: 100%;
+                max-width: 250px;
+            }
+            .cover-stat-item {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 100%;
+            }
+
+            .slide-header {
+                padding: 8px 12px;
+                background: linear-gradient(to bottom, rgba(255,255,255,0.98), transparent);
+            }
+            .logo-left img, .logo-right img { height: 25px; }
+
+            .slide-footer {
+                gap: 8px;
+                padding: 8px 12px;
+            }
+            .slide-footer img { height: 20px; }
+
+            .nav-extra-buttons {
+                flex-direction: column;
+                right: 5px;
+                bottom: 80px;
+            }
+            .nav-extra-btn { width: 30px; height: 30px; font-size: 0.75rem; }
+
+            .slide-indicators {
+                bottom: 45px;
+            }
+            .indicator { width: 5px; height: 5px; }
+
+            .download-btn {
+                padding: 10px 18px;
+                font-size: 0.85rem;
+            }
+
+            .download-section { margin-top: 30px; }
+
+            /* Hide heavy decorations on small screens */
+            .cover-grid { opacity: 0.3; }
+            .cover-lines { display: none; }
+            .floating-decor { display: none; }
+        }
+
+        /* Très petit mobile (360px) */
+        @media (max-width: 360px) {
+            .slide-content { padding: 70px 10px 60px; }
+            .section-title { font-size: 1.2rem; }
+
+            .cover-main-title { font-size: 1.5rem; }
+            .cover-main-title .line-1 { font-size: 0.85rem; }
+            .cover-main-title .line-2 { font-size: 1.3rem; }
+            .cover-tagline { font-size: 0.8rem; }
+
+            .slide-header, .slide-footer { padding: 6px 10px; }
+            .logo-left img, .logo-right img { height: 22px; }
+            .slide-footer img { height: 18px; }
+
+            .sommaire-item { padding: 8px 10px; font-size: 0.8rem; }
+        }
+
+        /* Orientation paysage sur mobile */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .slide-content { padding: 60px 30px 50px; }
+            .slide-header { padding: 8px 20px; }
+            .slide-footer { padding: 8px 20px; }
+            .logo-left img, .logo-right img { height: 28px; }
+            .slide-footer img { height: 22px; }
+
+            .cover-main-title { font-size: 2rem; }
+            .cover-top-badge { margin-bottom: 15px; }
+            .cover-stats-row { margin-top: 15px; }
+            .download-section { margin-top: 20px; }
+
+            .nav-extra-buttons {
+                bottom: auto;
+                top: 50%;
+                transform: translateY(-50%);
+            }
         }
     </style>
 </head>
