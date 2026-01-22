@@ -1,0 +1,2308 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Tâches AYENAH - Suivi Opérationnel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-green: #1B8C4E;
+            --primary-green-dark: #156B3D;
+            --secondary-green: #2ECC71;
+            --light-green: #E8F5E9;
+            --extra-light-green: #F1F8E9;
+            --accent-orange: #F39C12;
+            --accent-orange-light: #FDEBD0;
+            --dark: #1a1a2e;
+            --dark-gray: #2d3436;
+            --white: #ffffff;
+            --gray-light: #f8f9fa;
+            --gray: #6c757d;
+            --gray-medium: #95a5a6;
+            --shadow: 0 10px 40px rgba(0,0,0,0.08);
+            --shadow-hover: 0 25px 60px rgba(0,0,0,0.15);
+            --transition: all 0.3s ease;
+            --border-radius: 16px;
+
+            /* Phase colors */
+            --phase0-color: #3498db;
+            --phase1-color: #e74c3c;
+            --phase2-color: #f39c12;
+            --phase3-color: #1B8C4E;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8f5e9 100%);
+            color: var(--dark);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .main-header {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-green-dark) 100%);
+            color: var(--white);
+            padding: 25px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(27, 140, 78, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-left img {
+            height: 45px;
+        }
+
+        .header-title h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .header-title span {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .progress-global {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255,255,255,0.15);
+            padding: 10px 20px;
+            border-radius: 50px;
+        }
+
+        .progress-global span {
+            font-size: 0.9rem;
+        }
+
+        .progress-circle {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: conic-gradient(var(--accent-orange) 0%, transparent 0%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .progress-circle::before {
+            content: '';
+            position: absolute;
+            width: 35px;
+            height: 35px;
+            background: var(--primary-green-dark);
+            border-radius: 50%;
+        }
+
+        .progress-circle span {
+            position: relative;
+            z-index: 1;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            background: var(--white);
+            padding: 0 40px;
+            box-shadow: var(--shadow);
+            overflow-x: auto;
+        }
+
+        .nav-tab {
+            padding: 18px 30px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--gray);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: var(--transition);
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary-green);
+            background: var(--extra-light-green);
+        }
+
+        .nav-tab.active {
+            color: var(--primary-green);
+            border-bottom-color: var(--primary-green);
+            background: var(--extra-light-green);
+        }
+
+        .nav-tab i {
+            font-size: 1.1rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 30px 40px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ==================== VUE D'ENSEMBLE ==================== */
+        .phase-filter {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .phase-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .phase-btn.all { background: var(--gray-light); color: var(--dark); }
+        .phase-btn.phase0 { background: rgba(52, 152, 219, 0.15); color: var(--phase0-color); }
+        .phase-btn.phase1 { background: rgba(231, 76, 60, 0.15); color: var(--phase1-color); }
+        .phase-btn.phase2 { background: rgba(243, 156, 18, 0.15); color: var(--phase2-color); }
+        .phase-btn.phase3 { background: rgba(27, 140, 78, 0.15); color: var(--phase3-color); }
+
+        .phase-btn.active,
+        .phase-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .phase-btn.all.active { background: var(--dark); color: var(--white); }
+        .phase-btn.phase0.active { background: var(--phase0-color); color: var(--white); }
+        .phase-btn.phase1.active { background: var(--phase1-color); color: var(--white); }
+        .phase-btn.phase2.active { background: var(--phase2-color); color: var(--white); }
+        .phase-btn.phase3.active { background: var(--phase3-color); color: var(--white); }
+
+        .phase-count {
+            background: rgba(255,255,255,0.3);
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        /* Phase Section */
+        .phase-section {
+            margin-bottom: 40px;
+        }
+
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 20px 25px;
+            border-radius: var(--border-radius);
+            color: var(--white);
+        }
+
+        .phase-header.phase0 { background: linear-gradient(135deg, var(--phase0-color), #2980b9); }
+        .phase-header.phase1 { background: linear-gradient(135deg, var(--phase1-color), #c0392b); }
+        .phase-header.phase2 { background: linear-gradient(135deg, var(--phase2-color), #e67e22); }
+        .phase-header.phase3 { background: linear-gradient(135deg, var(--phase3-color), var(--primary-green-dark)); }
+
+        .phase-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .phase-info h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .phase-info span {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .phase-progress {
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .phase-progress .percentage {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .phase-progress .label {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        /* Domain Groups */
+        .domain-group {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .domain-header {
+            padding: 18px 25px;
+            background: var(--gray-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .domain-header:hover {
+            background: var(--light-green);
+        }
+
+        .domain-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .domain-title i {
+            width: 35px;
+            height: 35px;
+            background: var(--primary-green);
+            color: var(--white);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .domain-stats {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .domain-progress-bar {
+            width: 150px;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .domain-progress-fill {
+            height: 100%;
+            background: var(--primary-green);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .domain-count {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .domain-toggle {
+            color: var(--gray);
+            transition: var(--transition);
+        }
+
+        .domain-header.expanded .domain-toggle {
+            transform: rotate(180deg);
+        }
+
+        /* Tasks List */
+        .tasks-list {
+            display: none;
+            padding: 0;
+        }
+
+        .tasks-list.expanded {
+            display: block;
+        }
+
+        .task-item {
+            display: grid;
+            grid-template-columns: 40px 1fr 200px 150px 120px;
+            gap: 15px;
+            padding: 15px 25px;
+            border-bottom: 1px solid #eee;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .task-item:hover {
+            background: var(--extra-light-green);
+        }
+
+        .task-item:last-child {
+            border-bottom: none;
+        }
+
+        .task-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .task-checkbox:hover {
+            border-color: var(--primary-green);
+        }
+
+        .task-checkbox.checked {
+            background: var(--primary-green);
+            border-color: var(--primary-green);
+            color: var(--white);
+        }
+
+        .task-content h4 {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+
+        .task-content p {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .task-deliverable {
+            font-size: 0.85rem;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .task-deliverable i {
+            color: var(--accent-orange);
+        }
+
+        .task-responsible {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .responsible-avatar {
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .responsible-name {
+            font-size: 0.85rem;
+            color: var(--dark);
+        }
+
+        .task-status {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .task-status.pending {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .task-status.in-progress {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .task-status.completed {
+            background: var(--light-green);
+            color: var(--primary-green);
+        }
+
+        /* ==================== CHECKLIST ==================== */
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .checklist-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .checklist-card-header {
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark));
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .checklist-card-header h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checklist-card-header .count {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .checklist-items {
+            padding: 15px 20px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+
+        .check-box {
+            width: 22px;
+            height: 22px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            margin-top: 2px;
+        }
+
+        .check-box:hover {
+            border-color: var(--primary-green);
+        }
+
+        .check-box.checked {
+            background: var(--primary-green);
+            border-color: var(--primary-green);
+            color: var(--white);
+        }
+
+        .checklist-item.completed .check-text {
+            text-decoration: line-through;
+            color: var(--gray);
+        }
+
+        .check-text {
+            font-size: 0.9rem;
+            color: var(--dark);
+            line-height: 1.4;
+        }
+
+        /* ==================== KPIs ==================== */
+        .kpi-section {
+            margin-bottom: 40px;
+        }
+
+        .kpi-section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 20px;
+            padding-left: 15px;
+            border-left: 4px solid var(--primary-green);
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .kpi-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary-green);
+        }
+
+        .kpi-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .kpi-title {
+            font-size: 0.9rem;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .kpi-frequency {
+            font-size: 0.75rem;
+            background: var(--light-green);
+            color: var(--primary-green);
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .kpi-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .kpi-value input {
+            width: 100%;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark);
+            border: none;
+            border-bottom: 2px dashed #ddd;
+            background: transparent;
+            padding: 5px 0;
+        }
+
+        .kpi-value input:focus {
+            outline: none;
+            border-bottom-color: var(--primary-green);
+        }
+
+        .kpi-trend {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+        }
+
+        .kpi-trend.up {
+            color: var(--primary-green);
+        }
+
+        .kpi-trend.down {
+            color: var(--phase1-color);
+        }
+
+        .kpi-chart {
+            height: 40px;
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+            margin-top: 15px;
+        }
+
+        .kpi-bar {
+            flex: 1;
+            background: var(--light-green);
+            border-radius: 4px 4px 0 0;
+            min-height: 5px;
+            transition: height 0.3s ease;
+        }
+
+        .kpi-bar:last-child {
+            background: var(--primary-green);
+        }
+
+        /* ==================== CALENDRIER EDITORIAL ==================== */
+        .calendar-container {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .calendar-header {
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark));
+            color: var(--white);
+            padding: 25px 30px;
+            text-align: center;
+        }
+
+        .calendar-header h2 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .calendar-header p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+
+        .calendar-day {
+            padding: 25px 20px;
+            border-right: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            min-height: 200px;
+        }
+
+        .calendar-day:nth-child(7n) {
+            border-right: none;
+        }
+
+        .calendar-day:nth-child(n+7) {
+            border-bottom: none;
+        }
+
+        .day-header {
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-green);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .day-header i {
+            color: var(--primary-green);
+        }
+
+        .day-content-type {
+            background: var(--extra-light-green);
+            padding: 12px 15px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+        }
+
+        .content-type-label {
+            font-size: 0.75rem;
+            color: var(--primary-green);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .content-type-value {
+            font-size: 0.9rem;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        .day-channel {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .channel-tag {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 15px;
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .channel-tag.facebook { background: #e8f4fd; color: #1877f2; }
+        .channel-tag.linkedin { background: #e8f4f8; color: #0077b5; }
+        .channel-tag.instagram { background: #fce4ec; color: #e4405f; }
+        .channel-tag.youtube { background: #ffebee; color: #ff0000; }
+        .channel-tag.whatsapp { background: #e8f5e9; color: #25d366; }
+        .channel-tag.site { background: #fff3e0; color: #ff9800; }
+
+        .day-example {
+            font-size: 0.85rem;
+            color: var(--gray);
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        .day-rest {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--gray);
+            text-align: center;
+        }
+
+        .day-rest i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--gray-medium);
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 1200px) {
+            .task-item {
+                grid-template-columns: 40px 1fr 150px 120px;
+            }
+            .task-deliverable {
+                display: none;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .main-header {
+                padding: 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-tabs {
+                padding: 0 15px;
+            }
+
+            .nav-tab {
+                padding: 15px 20px;
+                font-size: 0.85rem;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+
+            .calendar-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .calendar-day {
+                border-right: none;
+                border-bottom: 1px solid #eee;
+                min-height: auto;
+            }
+
+            .calendar-day:last-child {
+                border-bottom: none;
+            }
+
+            .task-item {
+                grid-template-columns: 40px 1fr;
+                gap: 10px;
+            }
+
+            .task-responsible,
+            .task-status {
+                grid-column: 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-left img {
+                height: 35px;
+            }
+
+            .header-title h1 {
+                font-size: 1.2rem;
+            }
+
+            .progress-global {
+                padding: 8px 15px;
+            }
+
+            .nav-tab {
+                padding: 12px 15px;
+                font-size: 0.8rem;
+            }
+
+            .nav-tab span {
+                display: none;
+            }
+
+            .nav-tab i {
+                font-size: 1.2rem;
+            }
+
+            .phase-filter {
+                gap: 10px;
+            }
+
+            .phase-btn {
+                padding: 10px 15px;
+                font-size: 0.8rem;
+            }
+
+            .phase-btn span {
+                display: none;
+            }
+
+            .phase-header {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .phase-progress {
+                margin-left: 0;
+                width: 100%;
+                text-align: left;
+                margin-top: 10px;
+            }
+
+            .checklist-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .domain-header {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .domain-progress-bar {
+                width: 100px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-header {
+                padding: 15px;
+            }
+
+            .main-content {
+                padding: 15px;
+            }
+
+            .task-item {
+                padding: 12px 15px;
+            }
+
+            .task-content h4 {
+                font-size: 0.85rem;
+            }
+
+            .checklist-card-header {
+                padding: 15px;
+            }
+
+            .checklist-items {
+                padding: 10px 15px;
+            }
+
+            .kpi-card {
+                padding: 20px;
+            }
+
+            .kpi-value {
+                font-size: 2rem;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .main-header,
+            .nav-tabs,
+            .phase-filter {
+                display: none;
+            }
+
+            .main-content {
+                padding: 0;
+            }
+
+            .domain-group,
+            .checklist-card,
+            .kpi-card {
+                break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+
+            .tasks-list {
+                display: block !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-left">
+            <img src="images/logos/logo-ayenah.png" alt="AYENAH">
+            <div class="header-title">
+                <h1>Plan de Tâches AYENAH</h1>
+                <span>Suivi opérationnel de la stratégie de communication</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="progress-global">
+                <span>Progression globale</span>
+                <div class="progress-circle" id="globalProgress">
+                    <span>0%</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs">
+        <div class="nav-tab active" data-tab="overview">
+            <i class="fas fa-tasks"></i>
+            <span>Vue d'ensemble</span>
+        </div>
+        <div class="nav-tab" data-tab="checklist">
+            <i class="fas fa-check-square"></i>
+            <span>Checklist</span>
+        </div>
+        <div class="nav-tab" data-tab="kpis">
+            <i class="fas fa-chart-line"></i>
+            <span>KPIs</span>
+        </div>
+        <div class="nav-tab" data-tab="calendar">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Calendrier</span>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- VUE D'ENSEMBLE -->
+        <div class="tab-content active" id="overview">
+            <!-- Phase Filter -->
+            <div class="phase-filter">
+                <button class="phase-btn all active" data-phase="all">
+                    <i class="fas fa-layer-group"></i>
+                    <span>Toutes les phases</span>
+                    <span class="phase-count">141</span>
+                </button>
+                <button class="phase-btn phase0" data-phase="0">
+                    <i class="fas fa-cogs"></i>
+                    <span>T0 - Préparation</span>
+                    <span class="phase-count">53</span>
+                </button>
+                <button class="phase-btn phase1" data-phase="1">
+                    <i class="fas fa-rocket"></i>
+                    <span>T1 - Lancement</span>
+                    <span class="phase-count">30</span>
+                </button>
+                <button class="phase-btn phase2" data-phase="2">
+                    <i class="fas fa-users"></i>
+                    <span>T2 - Mobilisation</span>
+                    <span class="phase-count">32</span>
+                </button>
+                <button class="phase-btn phase3" data-phase="3">
+                    <i class="fas fa-trophy"></i>
+                    <span>T3 - Valorisation</span>
+                    <span class="phase-count">26</span>
+                </button>
+            </div>
+
+            <!-- TEMPS 0 - PRÉPARATION -->
+            <div class="phase-section" data-phase="0">
+                <div class="phase-header phase0">
+                    <div class="phase-icon"><i class="fas fa-cogs"></i></div>
+                    <div class="phase-info">
+                        <h2>TEMPS 0 - PRÉPARATION</h2>
+                        <span>Mise en place des fondations</span>
+                    </div>
+                    <div class="phase-progress">
+                        <div class="percentage">0%</div>
+                        <div class="label">0/53 tâches</div>
+                    </div>
+                </div>
+
+                <!-- GOUVERNANCE -->
+                <div class="domain-group">
+                    <div class="domain-header" onclick="toggleDomain(this)">
+                        <div class="domain-title">
+                            <i class="fas fa-sitemap"></i>
+                            <span>GOUVERNANCE</span>
+                        </div>
+                        <div class="domain-stats">
+                            <div class="domain-progress-bar">
+                                <div class="domain-progress-fill" style="width: 0%"></div>
+                            </div>
+                            <span class="domain-count">0/5</span>
+                            <i class="fas fa-chevron-down domain-toggle"></i>
+                        </div>
+                    </div>
+                    <div class="tasks-list">
+                        <div class="task-item">
+                            <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                            <div class="task-content">
+                                <h4>Nommer le responsable communication</h4>
+                                <p>Prérequis : -</p>
+                            </div>
+                            <div class="task-deliverable">
+                                <i class="fas fa-file-alt"></i>
+                                Lettre de mission signée
+                            </div>
+                            <div class="task-responsible">
+                                <div class="responsible-avatar">DG</div>
+                                <span class="responsible-name">Direction DGIE</span>
+                            </div>
+                            <div class="task-status pending">En attente</div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                            <div class="task-content">
+                                <h4>Définir le circuit de validation des contenus (3 niveaux)</h4>
+                                <p>Prérequis : -</p>
+                            </div>
+                            <div class="task-deliverable">
+                                <i class="fas fa-file-alt"></i>
+                                Procédure de validation documentée
+                            </div>
+                            <div class="task-responsible">
+                                <div class="responsible-avatar">CC</div>
+                                <span class="responsible-name">Cellule Coordination</span>
+                            </div>
+                            <div class="task-status pending">En attente</div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                            <div class="task-content">
+                                <h4>Établir le calendrier éditorial annuel</h4>
+                                <p>Prérequis : -</p>
+                            </div>
+                            <div class="task-deliverable">
+                                <i class="fas fa-file-alt"></i>
+                                Calendrier partagé (Google Sheets/Excel)
+                            </div>
+                            <div class="task-responsible">
+                                <div class="responsible-avatar">RC</div>
+                                <span class="responsible-name">Resp. Communication</span>
+                            </div>
+                            <div class="task-status pending">En attente</div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                            <div class="task-content">
+                                <h4>Créer le tableau de bord des KPIs</h4>
+                                <p>Prérequis : -</p>
+                            </div>
+                            <div class="task-deliverable">
+                                <i class="fas fa-file-alt"></i>
+                                Fichier de suivi opérationnel
+                            </div>
+                            <div class="task-responsible">
+                                <div class="responsible-avatar">RC</div>
+                                <span class="responsible-name">Resp. Communication</span>
+                            </div>
+                            <div class="task-status pending">En attente</div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                            <div class="task-content">
+                                <h4>Définir les réunions de coordination (fréquence, participants)</h4>
+                                <p>Prérequis : -</p>
+                            </div>
+                            <div class="task-deliverable">
+                                <i class="fas fa-file-alt"></i>
+                                Planning des réunions validé
+                            </div>
+                            <div class="task-responsible">
+                                <div class="responsible-avatar">CC</div>
+                                <span class="responsible-name">Cellule Coordination</span>
+                            </div>
+                            <div class="task-status pending">En attente</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SITE WEB -->
+                <div class="domain-group">
+                    <div class="domain-header" onclick="toggleDomain(this)">
+                        <div class="domain-title">
+                            <i class="fas fa-globe"></i>
+                            <span>SITE WEB</span>
+                        </div>
+                        <div class="domain-stats">
+                            <div class="domain-progress-bar">
+                                <div class="domain-progress-fill" style="width: 0%"></div>
+                            </div>
+                            <span class="domain-count">0/7</span>
+                            <i class="fas fa-chevron-down domain-toggle"></i>
+                        </div>
+                    </div>
+                    <div class="tasks-list">
+                        <div class="task-item">
+                            <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                            <div class="task-content">
+                                <h4>Finaliser l'architecture et l'arborescence du site</h4>
+                                <p>Prérequis : -</p>
+                            </div>
+                            <div class="task-deliverable"><i class="fas fa-file-alt"></i> Maquette validée</div>
+                            <div class="task-responsible">
+                                <div class="responsible-avatar">PW</div>
+                                <span class="responsible-name">Prestataire web</span>
+                            </div>
+                            <div class="task-status pending">En attente</div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                            <div class="task-content">
+                                <h4>Rédiger tous les contenus des pages</h4>
+                                <p>Prérequis : Arborescence validée</p>
+                            </div>
+                            <div class="task-deliverable"><i class="fas fa-file-alt"></i> Textes validés par domaine</div>
+                            <div class="task-responsible">
+                                <div class="responsible-avatar">RC</div>
+                                <span class="responsible-name">Resp. Communication</span>
+                            </div>
+                            <div class="task-status pending">En attente</div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                            <div class="task-content">
+                                <h4>Intégrer les formulaires de candidature (projets + expertise)</h4>
+                                <p>Prérequis : Procédures définies</p>
+                            </div>
+                            <div class="task-deliverable"><i class="fas fa-file-alt"></i> Formulaires fonctionnels</div>
+                            <div class="task-responsible">
+                                <div class="responsible-avatar">PW</div>
+                                <span class="responsible-name">Prestataire web</span>
+                            </div>
+                            <div class="task-status pending">En attente</div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                            <div class="task-content">
+                                <h4>Créer la FAQ complète</h4>
+                                <p>Prérequis : -</p>
+                            </div>
+                            <div class="task-deliverable"><i class="fas fa-file-alt"></i> FAQ publiée (min. 20 questions)</div>
+                            <div class="task-responsible">
+                                <div class="responsible-avatar">RC</div>
+                                <span class="responsible-name">Resp. Communication</span>
+                            </div>
+                            <div class="task-status pending">En attente</div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                            <div class="task-content">
+                                <h4>Tester le site (navigation, mobile, formulaires)</h4>
+                                <p>Prérequis : Site développé</p>
+                            </div>
+                            <div class="task-deliverable"><i class="fas fa-file-alt"></i> Rapport de test validé</div>
+                            <div class="task-responsible">
+                                <div class="responsible-avatar">EP</div>
+                                <span class="responsible-name">Équipe projet</span>
+                            </div>
+                            <div class="task-status pending">En attente</div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                            <div class="task-content">
+                                <h4>Installer Google Analytics et outils de suivi</h4>
+                                <p>Prérequis : -</p>
+                            </div>
+                            <div class="task-deliverable"><i class="fas fa-file-alt"></i> Tableaux de bord configurés</div>
+                            <div class="task-responsible">
+                                <div class="responsible-avatar">PW</div>
+                                <span class="responsible-name">Prestataire web</span>
+                            </div>
+                            <div class="task-status pending">En attente</div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                            <div class="task-content">
+                                <h4>Mettre en ligne le site (sans communication publique)</h4>
+                                <p>Prérequis : Tests validés</p>
+                            </div>
+                            <div class="task-deliverable"><i class="fas fa-file-alt"></i> URL active en test</div>
+                            <div class="task-responsible">
+                                <div class="responsible-avatar">PW</div>
+                                <span class="responsible-name">Prestataire web</span>
+                            </div>
+                            <div class="task-status pending">En attente</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RÉSEAUX SOCIAUX -->
+                <div class="domain-group">
+                    <div class="domain-header" onclick="toggleDomain(this)">
+                        <div class="domain-title">
+                            <i class="fas fa-share-alt"></i>
+                            <span>RÉSEAUX SOCIAUX</span>
+                        </div>
+                        <div class="domain-stats">
+                            <div class="domain-progress-bar">
+                                <div class="domain-progress-fill" style="width: 0%"></div>
+                            </div>
+                            <span class="domain-count">0/6</span>
+                            <i class="fas fa-chevron-down domain-toggle"></i>
+                        </div>
+                    </div>
+                    <div class="tasks-list">
+                        <div class="task-item">
+                            <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                            <div class="task-content">
+                                <h4>Créer la page Facebook AYENAH</h4>
+                                <p>Prérequis : Charte graphique</p>
+                            </div>
+                            <div class="task-deliverable"><i class="fas fa-file-alt"></i> Page créée et configurée</div>
+                            <div class="task-responsible">
+                                <div class="responsible-avatar">RC</div>
+                                <span class="responsible-name">Resp. Communication</span>
+                            </div>
+                            <div class="task-status pending">En attente</div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                            <div class="task-content">
+                                <h4>Créer la page LinkedIn AYENAH</h4>
+                                <p>Prérequis : Charte graphique</p>
+                            </div>
+                            <div class="task-deliverable"><i class="fas fa-file-alt"></i> Page créée et configurée</div>
+                            <div class="task-responsible">
+                                <div class="responsible-avatar">RC</div>
+                                <span class="responsible-name">Resp. Communication</span>
+                            </div>
+                            <div class="task-status pending">En attente</div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                            <div class="task-content">
+                                <h4>Créer la chaîne YouTube AYENAH</h4>
+                                <p>Prérequis : Charte graphique</p>
+                            </div>
+                            <div class="task-deliverable"><i class="fas fa-file-alt"></i> Chaîne créée et habillée</div>
+                            <div class="task-responsible">
+                                <div class="responsible-avatar">RC</div>
+                                <span class="responsible-name">Resp. Communication</span>
+                            </div>
+                            <div class="task-status pending">En attente</div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                            <div class="task-content">
+                                <h4>Configurer le canal WhatsApp officiel</h4>
+                                <p>Prérequis : -</p>
+                            </div>
+                            <div class="task-deliverable"><i class="fas fa-file-alt"></i> Canal opérationnel</div>
+                            <div class="task-responsible">
+                                <div class="responsible-avatar">RC</div>
+                                <span class="responsible-name">Resp. Communication</span>
+                            </div>
+                            <div class="task-status pending">En attente</div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                            <div class="task-content">
+                                <h4>Choisir et configurer l'outil de programmation (Hootsuite/Buffer)</h4>
+                                <p>Prérequis : -</p>
+                            </div>
+                            <div class="task-deliverable"><i class="fas fa-file-alt"></i> Outil opérationnel</div>
+                            <div class="task-responsible">
+                                <div class="responsible-avatar">RC</div>
+                                <span class="responsible-name">Resp. Communication</span>
+                            </div>
+                            <div class="task-status pending">En attente</div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                            <div class="task-content">
+                                <h4>Rédiger les descriptions et informations de chaque compte</h4>
+                                <p>Prérequis : -</p>
+                            </div>
+                            <div class="task-deliverable"><i class="fas fa-file-alt"></i> Bio et infos complètes</div>
+                            <div class="task-responsible">
+                                <div class="responsible-avatar">RC</div>
+                                <span class="responsible-name">Resp. Communication</span>
+                            </div>
+                            <div class="task-status pending">En attente</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEWSLETTER -->
+                <div class="domain-group">
+                    <div class="domain-header" onclick="toggleDomain(this)">
+                        <div class="domain-title">
+                            <i class="fas fa-envelope-open-text"></i>
+                            <span>NEWSLETTER</span>
+                        </div>
+                        <div class="domain-stats">
+                            <div class="domain-progress-bar">
+                                <div class="domain-progress-fill" style="width: 0%"></div>
+                            </div>
+                            <span class="domain-count">0/4</span>
+                            <i class="fas fa-chevron-down domain-toggle"></i>
+                        </div>
+                    </div>
+                    <div class="tasks-list">
+                        <div class="task-item">
+                            <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                            <div class="task-content">
+                                <h4>Choisir la plateforme d'emailing (Mailchimp/Sendinblue)</h4>
+                                <p>Prérequis : -</p>
+                            </div>
+                            <div class="task-deliverable"><i class="fas fa-file-alt"></i> Compte créé et configuré</div>
+                            <div class="task-responsible">
+                                <div class="responsible-avatar">RC</div>
+                                <span class="responsible-name">Resp. Communication</span>
+                            </div>
+                            <div class="task-status pending">En attente</div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                            <div class="task-content">
+                                <h4>Créer le template de newsletter aux couleurs AYENAH</h4>
+                                <p>Prérequis : Charte graphique</p>
+                            </div>
+                            <div class="task-deliverable"><i class="fas fa-file-alt"></i> Template validé</div>
+                            <div class="task-responsible">
+                                <div class="responsible-avatar">GR</div>
+                                <span class="responsible-name">Graphiste</span>
+                            </div>
+                            <div class="task-status pending">En attente</div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                            <div class="task-content">
+                                <h4>Rédiger le premier numéro (prêt pour le lancement)</h4>
+                                <p>Prérequis : Template validé</p>
+                            </div>
+                            <div class="task-deliverable"><i class="fas fa-file-alt"></i> Newsletter n°1 prête</div>
+                            <div class="task-responsible">
+                                <div class="responsible-avatar">RC</div>
+                                <span class="responsible-name">Resp. Communication</span>
+                            </div>
+                            <div class="task-status pending">En attente</div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-checkbox" onclick="toggleTask(this)"></div>
+                            <div class="task-content">
+                                <h4>Constituer la base initiale d'abonnés</h4>
+                                <p>Prérequis : -</p>
+                            </div>
+                            <div class="task-deliverable"><i class="fas fa-file-alt"></i> Liste de contacts qualifiés</div>
+                            <div class="task-responsible">
+                                <div class="responsible-avatar">EP</div>
+                                <span class="responsible-name">Équipe projet</span>
+                            </div>
+                            <div class="task-status pending">En attente</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Plus de domaines continueront... -->
+            </div>
+
+            <!-- Placeholder pour les autres phases -->
+            <div class="phase-section" data-phase="1" style="display: none;">
+                <div class="phase-header phase1">
+                    <div class="phase-icon"><i class="fas fa-rocket"></i></div>
+                    <div class="phase-info">
+                        <h2>TEMPS 1 - LANCEMENT</h2>
+                        <span>Activation et déploiement</span>
+                    </div>
+                    <div class="phase-progress">
+                        <div class="percentage">0%</div>
+                        <div class="label">0/30 tâches</div>
+                    </div>
+                </div>
+                <p style="padding: 20px; background: var(--white); border-radius: var(--border-radius); text-align: center; color: var(--gray);">
+                    <i class="fas fa-info-circle" style="font-size: 2rem; margin-bottom: 10px; display: block;"></i>
+                    Les tâches de cette phase seront activées après la complétion de la phase de préparation.
+                </p>
+            </div>
+
+            <div class="phase-section" data-phase="2" style="display: none;">
+                <div class="phase-header phase2">
+                    <div class="phase-icon"><i class="fas fa-users"></i></div>
+                    <div class="phase-info">
+                        <h2>TEMPS 2 - MOBILISATION</h2>
+                        <span>Engagement et animation</span>
+                    </div>
+                    <div class="phase-progress">
+                        <div class="percentage">0%</div>
+                        <div class="label">0/32 tâches</div>
+                    </div>
+                </div>
+                <p style="padding: 20px; background: var(--white); border-radius: var(--border-radius); text-align: center; color: var(--gray);">
+                    <i class="fas fa-info-circle" style="font-size: 2rem; margin-bottom: 10px; display: block;"></i>
+                    Les tâches de cette phase seront activées après la complétion de la phase de lancement.
+                </p>
+            </div>
+
+            <div class="phase-section" data-phase="3" style="display: none;">
+                <div class="phase-header phase3">
+                    <div class="phase-icon"><i class="fas fa-trophy"></i></div>
+                    <div class="phase-info">
+                        <h2>TEMPS 3 - VALORISATION</h2>
+                        <span>Capitalisation et bilan</span>
+                    </div>
+                    <div class="phase-progress">
+                        <div class="percentage">0%</div>
+                        <div class="label">0/26 tâches</div>
+                    </div>
+                </div>
+                <p style="padding: 20px; background: var(--white); border-radius: var(--border-radius); text-align: center; color: var(--gray);">
+                    <i class="fas fa-info-circle" style="font-size: 2rem; margin-bottom: 10px; display: block;"></i>
+                    Les tâches de cette phase seront activées après la complétion de la phase de mobilisation.
+                </p>
+            </div>
+        </div>
+
+        <!-- CHECKLIST -->
+        <div class="tab-content" id="checklist">
+            <div class="checklist-grid">
+                <!-- GOUVERNANCE -->
+                <div class="checklist-card">
+                    <div class="checklist-card-header">
+                        <h3><i class="fas fa-sitemap"></i> Gouvernance</h3>
+                        <span class="count">0/5</span>
+                    </div>
+                    <div class="checklist-items">
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Responsable communication nommé</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Circuit de validation défini</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Calendrier éditorial créé</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Tableau de bord KPIs opérationnel</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Réunions de coordination planifiées</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SITE WEB -->
+                <div class="checklist-card">
+                    <div class="checklist-card-header">
+                        <h3><i class="fas fa-globe"></i> Site Web</h3>
+                        <span class="count">0/7</span>
+                    </div>
+                    <div class="checklist-items">
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Architecture validée</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Contenus rédigés et intégrés</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Formulaires fonctionnels</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">FAQ complète</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Tests validés</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Analytics configuré</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Site en ligne</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RÉSEAUX SOCIAUX -->
+                <div class="checklist-card">
+                    <div class="checklist-card-header">
+                        <h3><i class="fas fa-share-alt"></i> Réseaux Sociaux</h3>
+                        <span class="count">0/5</span>
+                    </div>
+                    <div class="checklist-items">
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Page Facebook créée</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Page LinkedIn créée</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Chaîne YouTube créée</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Canal WhatsApp configuré</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Outil de programmation opérationnel</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEWSLETTER -->
+                <div class="checklist-card">
+                    <div class="checklist-card-header">
+                        <h3><i class="fas fa-envelope-open-text"></i> Newsletter</h3>
+                        <span class="count">0/4</span>
+                    </div>
+                    <div class="checklist-items">
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Plateforme choisie et configurée</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Template créé</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Newsletter n°1 prête</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Base d'abonnés initiale constituée</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRODUCTION CONTENUS -->
+                <div class="checklist-card">
+                    <div class="checklist-card-header">
+                        <h3><i class="fas fa-video"></i> Production Contenus</h3>
+                        <span class="count">0/5</span>
+                    </div>
+                    <div class="checklist-items">
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Vidéo de présentation produite</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Tutoriel candidature produit</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Templates visuels créés</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Stock de publications prêt (15-20)</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Infographies produites</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KIT COMMUNICATION -->
+                <div class="checklist-card">
+                    <div class="checklist-card-header">
+                        <h3><i class="fas fa-briefcase"></i> Kit Communication</h3>
+                        <span class="count">0/5</span>
+                    </div>
+                    <div class="checklist-items">
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Logos rassemblés</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Templates documents créés</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Textes de présentation rédigés</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Éléments de langage validés</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Kit assemblé et accessible</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SUPPORTS IMPRIMÉS -->
+                <div class="checklist-card">
+                    <div class="checklist-card-header">
+                        <h3><i class="fas fa-print"></i> Supports Imprimés</h3>
+                        <span class="count">0/4</span>
+                    </div>
+                    <div class="checklist-items">
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Plaquette conçue et imprimée</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Affiches conçues et imprimées</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Flyers conçus et imprimés</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Roll-ups/kakémonos produits</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RELATIONS PRESSE -->
+                <div class="checklist-card">
+                    <div class="checklist-card-header">
+                        <h3><i class="fas fa-newspaper"></i> Relations Presse</h3>
+                        <span class="count">0/5</span>
+                    </div>
+                    <div class="checklist-items">
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Fichier presse CI constitué</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Fichier presse diaspora constitué</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Dossier de presse finalisé</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Contacts clés identifiés</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">CP lancement prêt</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RÉSEAU DE RELAIS -->
+                <div class="checklist-card">
+                    <div class="checklist-card-header">
+                        <h3><i class="fas fa-network-wired"></i> Réseau de Relais</h3>
+                        <span class="count">0/4</span>
+                    </div>
+                    <div class="checklist-items">
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Associations partenaires identifiées</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Convention ambassadeur rédigée</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Représentations diplomatiques briefées</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Kit ambassadeur prêt</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ÉVÉNEMENT LANCEMENT -->
+                <div class="checklist-card">
+                    <div class="checklist-card-header">
+                        <h3><i class="fas fa-calendar-check"></i> Événement Lancement</h3>
+                        <span class="count">0/6</span>
+                    </div>
+                    <div class="checklist-items">
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Programme défini</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Lieu et prestataires réservés</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Invitations envoyées</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Captation organisée</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Supports événementiels prêts</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box" onclick="toggleCheck(this)"></div>
+                            <span class="check-text">Streaming préparé</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- KPIs -->
+        <div class="tab-content" id="kpis">
+            <!-- Site Web KPIs -->
+            <div class="kpi-section">
+                <h3 class="kpi-section-title">Site Web</h3>
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-title">Visiteurs uniques</span>
+                            <span class="kpi-frequency">Mensuel</span>
+                        </div>
+                        <div class="kpi-value"><input type="number" placeholder="0" /></div>
+                        <div class="kpi-chart">
+                            <div class="kpi-bar" style="height: 20%"></div>
+                            <div class="kpi-bar" style="height: 35%"></div>
+                            <div class="kpi-bar" style="height: 50%"></div>
+                            <div class="kpi-bar" style="height: 45%"></div>
+                            <div class="kpi-bar" style="height: 70%"></div>
+                            <div class="kpi-bar" style="height: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-title">Candidatures initiées</span>
+                            <span class="kpi-frequency">Mensuel</span>
+                        </div>
+                        <div class="kpi-value"><input type="number" placeholder="0" /></div>
+                        <div class="kpi-chart">
+                            <div class="kpi-bar" style="height: 15%"></div>
+                            <div class="kpi-bar" style="height: 25%"></div>
+                            <div class="kpi-bar" style="height: 40%"></div>
+                            <div class="kpi-bar" style="height: 55%"></div>
+                            <div class="kpi-bar" style="height: 60%"></div>
+                            <div class="kpi-bar" style="height: 75%"></div>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-title">Candidatures complétées</span>
+                            <span class="kpi-frequency">Mensuel</span>
+                        </div>
+                        <div class="kpi-value"><input type="number" placeholder="0" /></div>
+                        <div class="kpi-chart">
+                            <div class="kpi-bar" style="height: 10%"></div>
+                            <div class="kpi-bar" style="height: 20%"></div>
+                            <div class="kpi-bar" style="height: 35%"></div>
+                            <div class="kpi-bar" style="height: 50%"></div>
+                            <div class="kpi-bar" style="height: 55%"></div>
+                            <div class="kpi-bar" style="height: 70%"></div>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-title">Téléchargements ressources</span>
+                            <span class="kpi-frequency">Mensuel</span>
+                        </div>
+                        <div class="kpi-value"><input type="number" placeholder="0" /></div>
+                        <div class="kpi-chart">
+                            <div class="kpi-bar" style="height: 25%"></div>
+                            <div class="kpi-bar" style="height: 30%"></div>
+                            <div class="kpi-bar" style="height: 45%"></div>
+                            <div class="kpi-bar" style="height: 60%"></div>
+                            <div class="kpi-bar" style="height: 65%"></div>
+                            <div class="kpi-bar" style="height: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Réseaux Sociaux KPIs -->
+            <div class="kpi-section">
+                <h3 class="kpi-section-title">Réseaux Sociaux</h3>
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-title">Facebook - Abonnés</span>
+                            <span class="kpi-frequency">Mensuel</span>
+                        </div>
+                        <div class="kpi-value"><input type="number" placeholder="0" /></div>
+                        <div class="kpi-chart">
+                            <div class="kpi-bar" style="height: 20%"></div>
+                            <div class="kpi-bar" style="height: 35%"></div>
+                            <div class="kpi-bar" style="height: 50%"></div>
+                            <div class="kpi-bar" style="height: 65%"></div>
+                            <div class="kpi-bar" style="height: 75%"></div>
+                            <div class="kpi-bar" style="height: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-title">Facebook - Taux engagement</span>
+                            <span class="kpi-frequency">Mensuel</span>
+                        </div>
+                        <div class="kpi-value"><input type="text" placeholder="0%" /></div>
+                        <div class="kpi-chart">
+                            <div class="kpi-bar" style="height: 40%"></div>
+                            <div class="kpi-bar" style="height: 55%"></div>
+                            <div class="kpi-bar" style="height: 45%"></div>
+                            <div class="kpi-bar" style="height: 60%"></div>
+                            <div class="kpi-bar" style="height: 70%"></div>
+                            <div class="kpi-bar" style="height: 65%"></div>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-title">LinkedIn - Abonnés</span>
+                            <span class="kpi-frequency">Mensuel</span>
+                        </div>
+                        <div class="kpi-value"><input type="number" placeholder="0" /></div>
+                        <div class="kpi-chart">
+                            <div class="kpi-bar" style="height: 15%"></div>
+                            <div class="kpi-bar" style="height: 25%"></div>
+                            <div class="kpi-bar" style="height: 40%"></div>
+                            <div class="kpi-bar" style="height: 55%"></div>
+                            <div class="kpi-bar" style="height: 70%"></div>
+                            <div class="kpi-bar" style="height: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-title">YouTube - Abonnés</span>
+                            <span class="kpi-frequency">Mensuel</span>
+                        </div>
+                        <div class="kpi-value"><input type="number" placeholder="0" /></div>
+                        <div class="kpi-chart">
+                            <div class="kpi-bar" style="height: 10%"></div>
+                            <div class="kpi-bar" style="height: 20%"></div>
+                            <div class="kpi-bar" style="height: 35%"></div>
+                            <div class="kpi-bar" style="height: 45%"></div>
+                            <div class="kpi-bar" style="height: 60%"></div>
+                            <div class="kpi-bar" style="height: 75%"></div>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-title">YouTube - Vues totales</span>
+                            <span class="kpi-frequency">Mensuel</span>
+                        </div>
+                        <div class="kpi-value"><input type="number" placeholder="0" /></div>
+                        <div class="kpi-chart">
+                            <div class="kpi-bar" style="height: 20%"></div>
+                            <div class="kpi-bar" style="height: 30%"></div>
+                            <div class="kpi-bar" style="height: 50%"></div>
+                            <div class="kpi-bar" style="height: 65%"></div>
+                            <div class="kpi-bar" style="height: 80%"></div>
+                            <div class="kpi-bar" style="height: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-title">WhatsApp - Abonnés canal</span>
+                            <span class="kpi-frequency">Mensuel</span>
+                        </div>
+                        <div class="kpi-value"><input type="number" placeholder="0" /></div>
+                        <div class="kpi-chart">
+                            <div class="kpi-bar" style="height: 25%"></div>
+                            <div class="kpi-bar" style="height: 40%"></div>
+                            <div class="kpi-bar" style="height: 55%"></div>
+                            <div class="kpi-bar" style="height: 70%"></div>
+                            <div class="kpi-bar" style="height: 80%"></div>
+                            <div class="kpi-bar" style="height: 95%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Newsletter & Autres KPIs -->
+            <div class="kpi-section">
+                <h3 class="kpi-section-title">Newsletter & Engagement</h3>
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-title">Newsletter - Abonnés</span>
+                            <span class="kpi-frequency">Mensuel</span>
+                        </div>
+                        <div class="kpi-value"><input type="number" placeholder="0" /></div>
+                        <div class="kpi-chart">
+                            <div class="kpi-bar" style="height: 20%"></div>
+                            <div class="kpi-bar" style="height: 35%"></div>
+                            <div class="kpi-bar" style="height: 50%"></div>
+                            <div class="kpi-bar" style="height: 60%"></div>
+                            <div class="kpi-bar" style="height: 75%"></div>
+                            <div class="kpi-bar" style="height: 85%"></div>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-title">Newsletter - Taux d'ouverture</span>
+                            <span class="kpi-frequency">Par envoi</span>
+                        </div>
+                        <div class="kpi-value"><input type="text" placeholder="0%" /></div>
+                        <div class="kpi-chart">
+                            <div class="kpi-bar" style="height: 50%"></div>
+                            <div class="kpi-bar" style="height: 55%"></div>
+                            <div class="kpi-bar" style="height: 45%"></div>
+                            <div class="kpi-bar" style="height: 60%"></div>
+                            <div class="kpi-bar" style="height: 65%"></div>
+                            <div class="kpi-bar" style="height: 70%"></div>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-title">Experts inscrits</span>
+                            <span class="kpi-frequency">Mensuel</span>
+                        </div>
+                        <div class="kpi-value"><input type="number" placeholder="0" /></div>
+                        <div class="kpi-chart">
+                            <div class="kpi-bar" style="height: 15%"></div>
+                            <div class="kpi-bar" style="height: 25%"></div>
+                            <div class="kpi-bar" style="height: 40%"></div>
+                            <div class="kpi-bar" style="height: 55%"></div>
+                            <div class="kpi-bar" style="height: 65%"></div>
+                            <div class="kpi-bar" style="height: 80%"></div>
+                        </div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-header">
+                            <span class="kpi-title">Ambassadeurs actifs</span>
+                            <span class="kpi-frequency">Trimestriel</span>
+                        </div>
+                        <div class="kpi-value"><input type="number" placeholder="0" /></div>
+                        <div class="kpi-chart">
+                            <div class="kpi-bar" style="height: 30%"></div>
+                            <div class="kpi-bar" style="height: 45%"></div>
+                            <div class="kpi-bar" style="height: 55%"></div>
+                            <div class="kpi-bar" style="height: 70%"></div>
+                            <div class="kpi-bar" style="height: 80%"></div>
+                            <div class="kpi-bar" style="height: 90%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CALENDRIER EDITORIAL -->
+        <div class="tab-content" id="calendar">
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <h2><i class="fas fa-calendar-alt"></i> Calendrier Éditorial Hebdomadaire</h2>
+                    <p>Planning type des publications AYENAH</p>
+                </div>
+                <div class="calendar-grid">
+                    <!-- Lundi -->
+                    <div class="calendar-day">
+                        <div class="day-header">
+                            <i class="fas fa-calendar-day"></i>
+                            Lundi
+                        </div>
+                        <div class="day-content-type">
+                            <div class="content-type-label">Type de contenu</div>
+                            <div class="content-type-value">Information / Actualité AYENAH</div>
+                        </div>
+                        <div class="day-channel">
+                            <span class="channel-tag facebook">Facebook</span>
+                            <span class="channel-tag linkedin">LinkedIn</span>
+                        </div>
+                        <div class="day-example">
+                            Ex: Ouverture appel à projets, dates clés
+                        </div>
+                    </div>
+
+                    <!-- Mardi -->
+                    <div class="calendar-day">
+                        <div class="day-header">
+                            <i class="fas fa-calendar-day"></i>
+                            Mardi
+                        </div>
+                        <div class="day-content-type">
+                            <div class="content-type-label">Type de contenu</div>
+                            <div class="content-type-value">Témoignage / Portrait</div>
+                        </div>
+                        <div class="day-channel">
+                            <span class="channel-tag facebook">Facebook</span>
+                            <span class="channel-tag instagram">Instagram</span>
+                        </div>
+                        <div class="day-example">
+                            Ex: Portrait d'un porteur de projet, témoignage
+                        </div>
+                    </div>
+
+                    <!-- Mercredi -->
+                    <div class="calendar-day">
+                        <div class="day-header">
+                            <i class="fas fa-calendar-day"></i>
+                            Mercredi
+                        </div>
+                        <div class="day-content-type">
+                            <div class="content-type-label">Type de contenu</div>
+                            <div class="content-type-value">Contenu pédagogique</div>
+                        </div>
+                        <div class="day-channel">
+                            <span class="channel-tag linkedin">LinkedIn</span>
+                            <span class="channel-tag site">Site</span>
+                        </div>
+                        <div class="day-example">
+                            Ex: FAQ, tutoriel, conseil pratique
+                        </div>
+                    </div>
+
+                    <!-- Jeudi -->
+                    <div class="calendar-day">
+                        <div class="day-header">
+                            <i class="fas fa-calendar-day"></i>
+                            Jeudi
+                        </div>
+                        <div class="day-content-type">
+                            <div class="content-type-label">Type de contenu</div>
+                            <div class="content-type-value">Visuel / Infographie</div>
+                        </div>
+                        <div class="day-channel">
+                            <span class="channel-tag facebook">Facebook</span>
+                            <span class="channel-tag instagram">Instagram</span>
+                        </div>
+                        <div class="day-example">
+                            Ex: Chiffre clé, infographie processus
+                        </div>
+                    </div>
+
+                    <!-- Vendredi -->
+                    <div class="calendar-day">
+                        <div class="day-header">
+                            <i class="fas fa-calendar-day"></i>
+                            Vendredi
+                        </div>
+                        <div class="day-content-type">
+                            <div class="content-type-label">Type de contenu</div>
+                            <div class="content-type-value">Coulisses / Terrain</div>
+                        </div>
+                        <div class="day-channel">
+                            <span class="channel-tag facebook">Facebook</span>
+                            <span class="channel-tag whatsapp">WhatsApp</span>
+                        </div>
+                        <div class="day-example">
+                            Ex: Photo terrain, actualité équipe
+                        </div>
+                    </div>
+
+                    <!-- Samedi -->
+                    <div class="calendar-day">
+                        <div class="day-header">
+                            <i class="fas fa-calendar-day"></i>
+                            Samedi
+                        </div>
+                        <div class="day-content-type">
+                            <div class="content-type-label">Type de contenu</div>
+                            <div class="content-type-value">Contenu inspirant</div>
+                        </div>
+                        <div class="day-channel">
+                            <span class="channel-tag facebook">Facebook</span>
+                        </div>
+                        <div class="day-example">
+                            Ex: Citation, success story, motivation
+                        </div>
+                    </div>
+
+                    <!-- Dimanche -->
+                    <div class="calendar-day">
+                        <div class="day-header">
+                            <i class="fas fa-calendar-day"></i>
+                            Dimanche
+                        </div>
+                        <div class="day-rest">
+                            <i class="fas fa-coffee"></i>
+                            <span>Repos ou contenu léger</span>
+                            <small style="margin-top: 5px;">Optionnel</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Tab Navigation
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active from all tabs
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+                // Add active to clicked tab
+                this.classList.add('active');
+                document.getElementById(this.dataset.tab).classList.add('active');
+            });
+        });
+
+        // Phase Filter
+        document.querySelectorAll('.phase-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.phase-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+
+                const phase = this.dataset.phase;
+                document.querySelectorAll('.phase-section').forEach(section => {
+                    if (phase === 'all') {
+                        section.style.display = 'block';
+                    } else {
+                        section.style.display = section.dataset.phase === phase ? 'block' : 'none';
+                    }
+                });
+            });
+        });
+
+        // Toggle Domain
+        function toggleDomain(header) {
+            header.classList.toggle('expanded');
+            const tasksList = header.nextElementSibling;
+            tasksList.classList.toggle('expanded');
+        }
+
+        // Toggle Task
+        function toggleTask(checkbox) {
+            checkbox.classList.toggle('checked');
+            if (checkbox.classList.contains('checked')) {
+                checkbox.innerHTML = '<i class="fas fa-check"></i>';
+                checkbox.closest('.task-item').querySelector('.task-status').className = 'task-status completed';
+                checkbox.closest('.task-item').querySelector('.task-status').textContent = 'Terminé';
+            } else {
+                checkbox.innerHTML = '';
+                checkbox.closest('.task-item').querySelector('.task-status').className = 'task-status pending';
+                checkbox.closest('.task-item').querySelector('.task-status').textContent = 'En attente';
+            }
+            updateProgress();
+        }
+
+        // Toggle Checklist
+        function toggleCheck(checkbox) {
+            checkbox.classList.toggle('checked');
+            const item = checkbox.closest('.checklist-item');
+
+            if (checkbox.classList.contains('checked')) {
+                checkbox.innerHTML = '<i class="fas fa-check"></i>';
+                item.classList.add('completed');
+            } else {
+                checkbox.innerHTML = '';
+                item.classList.remove('completed');
+            }
+            updateChecklistCount(checkbox.closest('.checklist-card'));
+        }
+
+        // Update checklist count
+        function updateChecklistCount(card) {
+            const total = card.querySelectorAll('.check-box').length;
+            const completed = card.querySelectorAll('.check-box.checked').length;
+            card.querySelector('.count').textContent = `${completed}/${total}`;
+        }
+
+        // Update progress
+        function updateProgress() {
+            const allCheckboxes = document.querySelectorAll('.task-checkbox');
+            const completedCheckboxes = document.querySelectorAll('.task-checkbox.checked');
+            const percentage = Math.round((completedCheckboxes.length / allCheckboxes.length) * 100) || 0;
+
+            const progressCircle = document.getElementById('globalProgress');
+            progressCircle.style.background = `conic-gradient(var(--accent-orange) ${percentage}%, rgba(255,255,255,0.2) ${percentage}%)`;
+            progressCircle.querySelector('span').textContent = `${percentage}%`;
+
+            // Update domain progress
+            document.querySelectorAll('.domain-group').forEach(domain => {
+                const total = domain.querySelectorAll('.task-checkbox').length;
+                const completed = domain.querySelectorAll('.task-checkbox.checked').length;
+                const pct = Math.round((completed / total) * 100) || 0;
+
+                domain.querySelector('.domain-progress-fill').style.width = `${pct}%`;
+                domain.querySelector('.domain-count').textContent = `${completed}/${total}`;
+            });
+        }
+
+        // Initialize
+        updateProgress();
+    </script>
+</body>
+</html>
