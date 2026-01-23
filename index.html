@@ -856,6 +856,25 @@
             max-width: 1100px;
         }
 
+        .cards-grid-3x2 {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 25px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .cards-grid-3x2 .card:nth-child(1),
+        .cards-grid-3x2 .card:nth-child(2),
+        .cards-grid-3x2 .card:nth-child(3) {
+            grid-column: span 2;
+        }
+
+        .cards-grid-3x2 .card:nth-child(4),
+        .cards-grid-3x2 .card:nth-child(5) {
+            grid-column: span 3;
+        }
+
         .card {
             background: var(--white);
             border-radius: var(--border-radius);
@@ -1071,10 +1090,10 @@
         /* ==================== CIBLES / TARGETS ==================== */
         .targets-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 25px;
             width: 100%;
-            max-width: 1300px;
+            max-width: 1100px;
         }
 
         .target-card {
@@ -2235,6 +2254,8 @@
             .indicator { width: 8px; height: 8px; }
 
             .cards-grid-2x2 { grid-template-columns: 1fr; gap: 15px; }
+            .cards-grid-3x2 { grid-template-columns: 1fr; gap: 15px; }
+            .cards-grid-3x2 .card { grid-column: span 1 !important; }
             .timeline { flex-direction: column; }
             .timeline::before { display: none; }
             .budget-container { flex-direction: column; }
@@ -2685,7 +2706,7 @@
                         <p class="section-subtitle">Une diaspora à fort potentiel mais des défis structurels à relever</p>
                     </div>
 
-                    <div class="cards-grid-2x2">
+                    <div class="cards-grid-3x2">
                         <div class="card">
                             <div class="card-header">
                                 <div class="card-icon"><i class="fas fa-globe-africa"></i></div>
@@ -2699,6 +2720,13 @@
                                 <h3 class="card-title">Confiance à construire</h3>
                             </div>
                             <p class="card-text">Une diaspora qui a besoin d'être <strong>rassurée sur la crédibilité</strong> des dispositifs officiels et la transparence des procédures.</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-icon" style="background: linear-gradient(135deg, var(--accent-orange-light), #FFF5E6); color: var(--accent-orange);"><i class="fas fa-exchange-alt"></i></div>
+                                <h3 class="card-title">Transferts insuffisants</h3>
+                            </div>
+                            <p class="card-text">Les mécanismes facilitant les transferts d'argent <strong>ne suffisent pas</strong>. Il faut des dispositifs d'accompagnement pour orienter ces flux.</p>
                         </div>
                         <div class="card">
                             <div class="card-header">
@@ -2827,7 +2855,7 @@
                         <p class="section-subtitle">Ce que la communication permet de résoudre pour garantir le succès</p>
                     </div>
 
-                    <div class="cards-grid-2x2">
+                    <div class="cards-grid-3x2">
                         <div class="card card-enjeux">
                             <div class="card-header">
                                 <div class="card-icon"><i class="fas fa-handshake"></i></div>
@@ -2841,6 +2869,13 @@
                                 <h3 class="card-title">Enjeu de Mobilisation</h3>
                             </div>
                             <p class="card-text">Toucher, informer et engager des <strong>communautés dispersées</strong> sur plusieurs continents avec des réalités diverses.</p>
+                        </div>
+                        <div class="card card-enjeux">
+                            <div class="card-header">
+                                <div class="card-icon"><i class="fas fa-university"></i></div>
+                                <h3 class="card-title">Enjeu Institutionnel</h3>
+                            </div>
+                            <p class="card-text">Démontrer la <strong>compétence de la DGIE</strong> à gérer ce type de fonds et intégrer ce dispositif dans la <strong>Politique Nationale de Gestion de la Diaspora Ivoirienne (PNGDI)</strong>.</p>
                         </div>
                         <div class="card card-enjeux">
                             <div class="card-header">
@@ -2976,16 +3011,6 @@
                                 <span class="channel-tag">Webinaires</span>
                                 <span class="channel-tag">Email</span>
                                 <span class="channel-tag">Presse pro</span>
-                            </div>
-                        </div>
-                        <div class="target-card">
-                            <div class="target-icon"><i class="fas fa-graduation-cap"></i></div>
-                            <h3 class="target-title">Jeunes & Étudiants</h3>
-                            <div class="target-channels">
-                                <span class="channel-tag">Facebook</span>
-                                <span class="channel-tag">WhatsApp</span>
-                                <span class="channel-tag">LinkedIn</span>
-                                <span class="channel-tag">YouTube</span>
                             </div>
                         </div>
                         <div class="target-card">
@@ -3590,7 +3615,7 @@
 
                     <div class="conclusion-container">
                         <div class="conclusion-box">
-                            <p class="conclusion-quote">"AYENAH repose sur la participation volontaire d'acteurs dispersés de par le monde. Sans communication efficace et cibléepour les atteindre, les informer et les convaincre, le meilleur dispositif reste invisible."</p>
+                            <p class="conclusion-quote">"AYENAH repose sur la participation volontaire d'acteurs dispersés de par le monde. Sans communication efficace et ciblée, le meilleur dispositif reste invisible."</p>
                             <p class="conclusion-text">La communication n'est pas une dépense accessoire — c'est <strong>l'investissement stratégique</strong> qui permet à AYENAH de remplir sa mission.</p>
                         </div>
 
