@@ -74,6 +74,32 @@
             overflow: hidden;
         }
 
+        /* Scrollable slide content */
+        .slide-content {
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-green) transparent;
+        }
+
+        .slide-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .slide-content::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .slide-content::-webkit-scrollbar-thumb {
+            background: var(--primary-green);
+            border-radius: 3px;
+        }
+
+        .slide-content::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-green-dark);
+        }
+
         /* Slide Background Patterns */
         .slide-pattern {
             background:
@@ -274,7 +300,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 110px 80px 100px;
+            padding: 110px 80px 180px;
             position: relative;
             z-index: 10;
         }
@@ -1665,11 +1691,12 @@
             display: flex;
             gap: 12px;
             z-index: 1000;
-            background: rgba(255,255,255,0.95);
+            background: rgba(255,255,255,0.7);
             padding: 10px 15px;
             border-radius: 50px;
-            box-shadow: var(--shadow);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.5);
         }
 
         .nav-btn {
@@ -1677,7 +1704,7 @@
             height: 48px;
             border: none;
             border-radius: 50%;
-            background: var(--white);
+            background: rgba(255,255,255,0.8);
             color: var(--primary-green);
             font-size: 1.1rem;
             cursor: pointer;
@@ -1703,10 +1730,12 @@
             position: fixed;
             bottom: 108px;
             right: 50px;
-            background: var(--white);
+            background: rgba(255,255,255,0.7);
             padding: 12px 22px;
             border-radius: 30px;
-            box-shadow: var(--shadow);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.5);
             font-weight: 600;
             color: var(--primary-green);
             z-index: 1000;
@@ -1732,19 +1761,24 @@
             flex-direction: column;
             gap: 10px;
             z-index: 1000;
+            background: rgba(255,255,255,0.5);
+            padding: 10px 8px;
+            border-radius: 20px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.4);
         }
 
         .indicator {
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            background: rgba(27, 140, 78, 0.25);
+            background: rgba(27, 140, 78, 0.3);
             cursor: pointer;
             transition: var(--transition);
         }
 
         .indicator:hover {
-            background: rgba(27, 140, 78, 0.5);
+            background: rgba(27, 140, 78, 0.6);
             transform: scale(1.4);
         }
 
@@ -1769,20 +1803,21 @@
             height: 42px;
             border: none;
             border-radius: 12px;
-            background: rgba(255,255,255,0.95);
+            background: rgba(255,255,255,0.6);
             color: var(--primary-green);
             font-size: 1rem;
             cursor: pointer;
-            box-shadow: var(--shadow);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             transition: var(--transition);
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.5);
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         .nav-extra-btn:hover {
-            background: var(--primary-green);
+            background: rgba(27, 140, 78, 0.9);
             color: var(--white);
             transform: scale(1.1);
         }
@@ -2193,7 +2228,7 @@
 
         /* Tablette (1024px) */
         @media (max-width: 1024px) {
-            .slide-content { padding: 100px 50px 100px; }
+            .slide-content { padding: 100px 50px 160px; }
             .section-title { font-size: 2.2rem; }
             .section-subtitle { font-size: 1rem; }
 
@@ -2209,11 +2244,20 @@
             .sommaire-content { width: 90%; max-width: 500px; }
 
             .cover-stats-row { flex-wrap: wrap; justify-content: center; }
+
+            .budget-chart { width: 240px; height: 240px; }
+            .budget-items { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+
+            .conclusion-box { padding: 40px 50px; }
+            .conclusion-quote { font-size: 1.5rem; }
+
+            .nav-controls { bottom: 90px; }
+            .slide-counter { bottom: 98px; right: 40px; }
         }
 
         /* Tablette portrait / Mobile large (768px) */
         @media (max-width: 768px) {
-            .slide-content { padding: 90px 25px 80px; }
+            .slide-content { padding: 90px 25px 150px; }
             .section-title { font-size: 1.8rem; }
             .section-subtitle { font-size: 0.95rem; }
 
@@ -2270,11 +2314,74 @@
             .sommaire-content { width: 95%; padding: 20px; }
             .sommaire-title { font-size: 1.3rem; }
             .sommaire-item { padding: 12px 15px; font-size: 0.9rem; }
+
+            .budget-chart { width: 200px; height: 200px; }
+            .budget-items { grid-template-columns: 1fr; }
+            .budget-item { padding: 14px 18px; }
+            .budget-center-value { font-size: 1.2rem; }
+            .budget-center-label { font-size: 0.8rem; }
+
+            .conclusion-box { padding: 30px 25px; }
+            .conclusion-quote { font-size: 1.3rem; }
+            .conclusion-text { font-size: 1rem; }
+
+            .nav-controls {
+                bottom: 70px;
+                padding: 8px 12px;
+            }
+            .nav-btn { width: 42px; height: 42px; font-size: 1rem; }
+            .slide-counter {
+                bottom: 78px;
+                right: 20px;
+                padding: 10px 18px;
+                font-size: 0.85rem;
+            }
+
+            .timeline-content { padding: 20px; }
+            .timeline-title { font-size: 1rem; }
+            .timeline-desc { font-size: 0.85rem; }
+
+            .pillar { padding: 30px 25px; }
+            .pillar-title { font-size: 1.15rem; }
+            .pillar-text { font-size: 0.9rem; }
+            .pillar-number { width: 50px; height: 50px; font-size: 1.4rem; }
+
+            .card { padding: 25px; }
+            .card-icon { width: 55px; height: 55px; font-size: 22px; }
+            .card-title { font-size: 1.1rem; }
+            .card-text { font-size: 0.9rem; }
+
+            .key-message { padding: 20px 25px; }
+            .key-message p { font-size: 1rem; }
+
+            .stat-card { padding: 25px 20px; }
+            .stat-number { font-size: 2.2rem; }
+            .stat-label { font-size: 0.85rem; }
+
+            .target-card { padding: 25px 20px; }
+            .target-icon { width: 65px; height: 65px; font-size: 1.6rem; }
+            .target-title { font-size: 1rem; }
+            .channel-tag { font-size: 0.7rem; padding: 4px 10px; }
+
+            .ecosystem-item { padding: 22px 15px; }
+            .ecosystem-icon { width: 55px; height: 55px; font-size: 1.5rem; }
+            .ecosystem-title { font-size: 0.9rem; }
+            .ecosystem-desc { font-size: 0.8rem; }
+
+            .governance-card { padding: 25px; }
+            .governance-icon { width: 55px; height: 55px; font-size: 1.5rem; }
+            .governance-title { font-size: 1.05rem; }
+            .governance-text { font-size: 0.9rem; }
+
+            .kpi-category { padding: 22px; }
+            .kpi-category-icon { width: 42px; height: 42px; font-size: 1.1rem; }
+            .kpi-category-title { font-size: 1rem; }
+            .kpi-name, .kpi-value { font-size: 0.85rem; }
         }
 
         /* Mobile moyen (576px) */
         @media (max-width: 576px) {
-            .slide-content { padding: 80px 15px 70px; }
+            .slide-content { padding: 80px 15px 140px; }
             .section-title { font-size: 1.5rem; }
             .section-subtitle { font-size: 0.85rem; }
 
@@ -2344,11 +2451,90 @@
             .decor-element { opacity: 0.03; }
             .orb { filter: blur(80px); }
             .geo-shape { display: none; }
+
+            .budget-container { gap: 30px; }
+            .budget-chart { width: 180px; height: 180px; }
+            .budget-center-value { font-size: 1rem; }
+            .budget-center-label { font-size: 0.75rem; }
+            .budget-item { padding: 12px 15px; gap: 12px; }
+            .budget-color { width: 12px; height: 35px; }
+            .budget-info h4 { font-size: 0.9rem; }
+            .budget-info span { font-size: 0.75rem; }
+            .budget-percent { font-size: 1.1rem; }
+
+            .conclusion-box { padding: 25px 20px; border-radius: 20px; }
+            .conclusion-quote { font-size: 1.1rem; line-height: 1.4; }
+            .conclusion-text { font-size: 0.9rem; }
+
+            .nav-controls {
+                bottom: 55px;
+                gap: 8px;
+                padding: 6px 10px;
+            }
+            .nav-btn { width: 38px; height: 38px; font-size: 0.9rem; }
+            .slide-counter {
+                bottom: 63px;
+                right: 15px;
+                padding: 8px 14px;
+                font-size: 0.8rem;
+            }
+
+            .timeline-item { padding-top: 50px; }
+            .timeline-dot { width: 26px; height: 26px; top: 20px; }
+            .timeline-content { padding: 18px; }
+            .timeline-phase { font-size: 0.7rem; padding: 4px 12px; }
+            .timeline-title { font-size: 0.95rem; }
+            .timeline-desc { font-size: 0.8rem; }
+
+            .pillar { padding: 25px 20px; }
+            .pillar-number { width: 45px; height: 45px; font-size: 1.2rem; margin-bottom: 18px; }
+            .pillar-title { font-size: 1.05rem; }
+            .pillar-text { font-size: 0.85rem; margin-bottom: 18px; }
+            .pillar-badge { padding: 10px 18px; font-size: 0.8rem; }
+
+            .card { padding: 20px; }
+            .card-header { gap: 15px; margin-bottom: 14px; }
+            .card-icon { width: 48px; height: 48px; font-size: 20px; border-radius: 12px; }
+            .card-title { font-size: 1rem; margin-top: 5px; }
+            .card-text { font-size: 0.85rem; line-height: 1.6; }
+
+            .key-message { padding: 18px 20px; margin-top: 25px; }
+            .key-message p { font-size: 0.9rem; }
+
+            .stat-card { padding: 22px 18px; }
+            .stat-number { font-size: 1.8rem; }
+            .stat-label { font-size: 0.8rem; }
+
+            .target-card { padding: 20px 15px; }
+            .target-icon { width: 55px; height: 55px; font-size: 1.4rem; margin-bottom: 15px; }
+            .target-title { font-size: 0.95rem; margin-bottom: 10px; }
+            .channel-tag { font-size: 0.65rem; padding: 3px 8px; }
+
+            .ecosystem-item { padding: 18px 12px; }
+            .ecosystem-icon { width: 48px; height: 48px; font-size: 1.3rem; margin-bottom: 12px; border-radius: 14px; }
+            .ecosystem-title { font-size: 0.85rem; margin-bottom: 6px; }
+            .ecosystem-desc { font-size: 0.75rem; }
+
+            .governance-card { padding: 20px; }
+            .governance-icon { width: 50px; height: 50px; font-size: 1.3rem; margin-bottom: 15px; }
+            .governance-title { font-size: 0.95rem; margin-bottom: 10px; }
+            .governance-text { font-size: 0.85rem; }
+
+            .kpi-category { padding: 18px; }
+            .kpi-category-header { gap: 12px; margin-bottom: 15px; padding-bottom: 12px; }
+            .kpi-category-icon { width: 38px; height: 38px; font-size: 1rem; border-radius: 10px; }
+            .kpi-category-title { font-size: 0.9rem; }
+            .kpi-item { padding: 10px 0; }
+            .kpi-name { font-size: 0.8rem; }
+            .kpi-value { font-size: 0.8rem; padding: 3px 10px; }
+
+            .section-badge { padding: 6px 14px; font-size: 0.75rem; }
+            .section-header { margin-bottom: 35px; }
         }
 
         /* Petit mobile (480px) */
         @media (max-width: 480px) {
-            .slide-content { padding: 75px 12px 65px; }
+            .slide-content { padding: 75px 12px 130px; }
             .section-title { font-size: 1.3rem; }
             .section-subtitle { font-size: 0.8rem; }
 
@@ -2413,11 +2599,90 @@
             .cover-grid { opacity: 0.3; }
             .cover-lines { display: none; }
             .floating-decor { display: none; }
+
+            .budget-container { gap: 20px; align-items: center; }
+            .budget-chart { width: 150px; height: 150px; }
+            .budget-chart-wrapper { margin: 0 auto; }
+            .budget-center-value { font-size: 0.9rem; }
+            .budget-center-label { font-size: 0.7rem; }
+            .budget-item { padding: 10px 12px; border-radius: 12px; }
+            .budget-color { width: 10px; height: 30px; border-radius: 5px; }
+            .budget-info h4 { font-size: 0.85rem; }
+            .budget-info span { font-size: 0.7rem; }
+            .budget-percent { font-size: 1rem; }
+
+            .conclusion-box { padding: 20px 15px; }
+            .conclusion-quote { font-size: 1rem; margin-bottom: 15px; }
+            .conclusion-text { font-size: 0.85rem; }
+
+            .nav-controls {
+                bottom: 45px;
+                gap: 6px;
+                padding: 5px 8px;
+            }
+            .nav-btn { width: 34px; height: 34px; font-size: 0.85rem; }
+            .slide-counter {
+                bottom: 53px;
+                right: 10px;
+                padding: 6px 12px;
+                font-size: 0.75rem;
+            }
+
+            .timeline-content { padding: 15px; }
+            .timeline-phase { font-size: 0.65rem; padding: 3px 10px; }
+            .timeline-title { font-size: 0.9rem; }
+            .timeline-desc { font-size: 0.75rem; }
+
+            .pillar { padding: 20px 15px; border-radius: 20px; }
+            .pillar-number { width: 40px; height: 40px; font-size: 1.1rem; margin-bottom: 15px; }
+            .pillar-title { font-size: 1rem; margin-bottom: 10px; }
+            .pillar-text { font-size: 0.8rem; margin-bottom: 15px; }
+            .pillar-badge { padding: 8px 15px; font-size: 0.75rem; }
+
+            .card { padding: 18px; border-radius: 15px; }
+            .card-header { gap: 12px; margin-bottom: 12px; }
+            .card-icon { width: 42px; height: 42px; font-size: 18px; border-radius: 10px; }
+            .card-title { font-size: 0.95rem; }
+            .card-text { font-size: 0.8rem; }
+
+            .key-message { padding: 15px; margin-top: 20px; border-radius: 0 15px 15px 0; }
+            .key-message p { font-size: 0.85rem; }
+
+            .stat-card { padding: 18px 15px; border-radius: 15px; }
+            .stat-number { font-size: 1.5rem; }
+            .stat-label { font-size: 0.75rem; }
+
+            .target-card { padding: 18px 12px; border-radius: 15px; }
+            .target-icon { width: 48px; height: 48px; font-size: 1.2rem; margin-bottom: 12px; }
+            .target-title { font-size: 0.9rem; margin-bottom: 8px; }
+            .target-channels { gap: 5px; }
+            .channel-tag { font-size: 0.6rem; padding: 2px 6px; }
+
+            .ecosystem-item { padding: 15px 10px; border-radius: 15px; }
+            .ecosystem-icon { width: 42px; height: 42px; font-size: 1.1rem; margin-bottom: 10px; border-radius: 12px; }
+            .ecosystem-title { font-size: 0.8rem; margin-bottom: 5px; }
+            .ecosystem-desc { font-size: 0.7rem; }
+
+            .governance-card { padding: 18px; border-radius: 15px; }
+            .governance-icon { width: 45px; height: 45px; font-size: 1.2rem; margin-bottom: 12px; }
+            .governance-title { font-size: 0.9rem; margin-bottom: 8px; }
+            .governance-text { font-size: 0.8rem; }
+
+            .kpi-category { padding: 15px; border-radius: 15px; }
+            .kpi-category-header { gap: 10px; margin-bottom: 12px; padding-bottom: 10px; }
+            .kpi-category-icon { width: 35px; height: 35px; font-size: 0.9rem; border-radius: 8px; }
+            .kpi-category-title { font-size: 0.85rem; }
+            .kpi-item { padding: 8px 0; }
+            .kpi-name { font-size: 0.75rem; }
+            .kpi-value { font-size: 0.75rem; padding: 2px 8px; }
+
+            .section-badge { padding: 5px 12px; font-size: 0.7rem; gap: 6px; margin-bottom: 15px; }
+            .section-header { margin-bottom: 30px; }
         }
 
         /* Très petit mobile (360px) */
         @media (max-width: 360px) {
-            .slide-content { padding: 70px 10px 60px; }
+            .slide-content { padding: 70px 10px 120px; }
             .section-title { font-size: 1.2rem; }
 
             .cover-main-title { font-size: 1.5rem; }
@@ -2430,11 +2695,61 @@
             .slide-footer img { height: 18px; }
 
             .sommaire-item { padding: 8px 10px; font-size: 0.8rem; }
+
+            .budget-chart { width: 130px; height: 130px; }
+            .budget-center-value { font-size: 0.8rem; }
+            .budget-center-label { font-size: 0.65rem; }
+            .budget-item { padding: 8px 10px; }
+            .budget-info h4 { font-size: 0.8rem; }
+            .budget-info span { font-size: 0.65rem; }
+            .budget-percent { font-size: 0.9rem; }
+
+            .conclusion-box { padding: 18px 12px; }
+            .conclusion-quote { font-size: 0.9rem; }
+            .conclusion-text { font-size: 0.8rem; }
+
+            .nav-controls { bottom: 40px; }
+            .nav-btn { width: 30px; height: 30px; font-size: 0.75rem; }
+            .slide-counter { bottom: 48px; padding: 5px 10px; font-size: 0.7rem; }
+
+            .card { padding: 15px; }
+            .card-icon { width: 38px; height: 38px; font-size: 16px; }
+            .card-title { font-size: 0.9rem; }
+            .card-text { font-size: 0.75rem; }
+
+            .pillar { padding: 18px 12px; }
+            .pillar-number { width: 36px; height: 36px; font-size: 1rem; }
+            .pillar-title { font-size: 0.9rem; }
+            .pillar-text { font-size: 0.75rem; }
+            .pillar-badge { padding: 6px 12px; font-size: 0.7rem; }
+
+            .stat-card { padding: 15px 12px; }
+            .stat-number { font-size: 1.3rem; }
+            .stat-label { font-size: 0.7rem; }
+
+            .target-card { padding: 15px 10px; }
+            .target-icon { width: 42px; height: 42px; font-size: 1rem; }
+            .target-title { font-size: 0.85rem; }
+
+            .kpi-category { padding: 12px; }
+            .kpi-category-icon { width: 30px; height: 30px; font-size: 0.8rem; }
+            .kpi-category-title { font-size: 0.8rem; }
+            .kpi-name, .kpi-value { font-size: 0.7rem; }
+
+            .governance-card { padding: 15px; }
+            .governance-icon { width: 40px; height: 40px; font-size: 1rem; }
+            .governance-title { font-size: 0.85rem; }
+            .governance-text { font-size: 0.75rem; }
+
+            .ecosystem-item { padding: 12px 8px; }
+            .ecosystem-icon { width: 38px; height: 38px; font-size: 1rem; }
+            .ecosystem-title { font-size: 0.75rem; }
+            .ecosystem-desc { font-size: 0.65rem; }
         }
 
         /* Orientation paysage sur mobile */
         @media (max-height: 500px) and (orientation: landscape) {
-            .slide-content { padding: 60px 30px 50px; }
+            .slide-content { padding: 60px 30px 120px; }
             .slide-header { padding: 8px 20px; }
             .slide-footer { padding: 8px 20px; }
             .logo-left img, .logo-right img { height: 28px; }
@@ -2450,6 +2765,62 @@
                 top: 50%;
                 transform: translateY(-50%);
             }
+
+            .section-title { font-size: 1.6rem; }
+            .section-subtitle { font-size: 0.85rem; }
+            .section-header { margin-bottom: 25px; }
+
+            .cards-grid-2x2 { gap: 15px; }
+            .card { padding: 20px; }
+            .pillar { padding: 20px; }
+            .target-card { padding: 18px; }
+            .ecosystem-item { padding: 15px; }
+            .stat-card { padding: 20px; }
+            .governance-card { padding: 20px; }
+            .kpi-category { padding: 18px; }
+
+            .conclusion-box { padding: 25px 30px; }
+            .conclusion-quote { font-size: 1.2rem; }
+
+            .budget-container { gap: 30px; }
+            .budget-chart { width: 180px; height: 180px; }
+
+            .nav-controls { bottom: 50px; }
+            .slide-counter { bottom: 58px; }
+            .slide-indicators { gap: 6px; }
+            .indicator { width: 7px; height: 7px; }
+        }
+
+        /* Écrans très larges (> 1600px) - amélioration pour grands écrans */
+        @media (min-width: 1600px) {
+            .slide-content { padding: 120px 100px 200px; }
+            .section-title { font-size: 3.2rem; }
+            .section-subtitle { font-size: 1.25rem; }
+
+            .cover-main-title { font-size: 6rem; }
+            .cover-main-title .line-1 { font-size: 2.8rem; }
+            .cover-tagline { font-size: 1.8rem; }
+
+            .cards-grid-2x2 { gap: 40px; max-width: 1300px; }
+            .card { padding: 45px; }
+            .card-icon { width: 75px; height: 75px; font-size: 30px; }
+            .card-title { font-size: 1.4rem; }
+            .card-text { font-size: 1.1rem; }
+
+            .pillars-container { gap: 50px; }
+            .pillar { padding: 50px 45px; max-width: 450px; }
+            .pillar-number { width: 70px; height: 70px; font-size: 1.8rem; }
+            .pillar-title { font-size: 1.5rem; }
+            .pillar-text { font-size: 1.05rem; }
+
+            .budget-chart { width: 320px; height: 320px; }
+            .budget-center-value { font-size: 1.6rem; }
+            .budget-items { gap: 22px; }
+            .budget-item { padding: 22px 28px; }
+
+            .conclusion-box { padding: 60px 80px; }
+            .conclusion-quote { font-size: 2rem; }
+            .conclusion-text { font-size: 1.2rem; }
         }
     </style>
 </head>
@@ -3759,6 +4130,13 @@
 
             document.getElementById('prevBtn').disabled = currentSlide === 0;
             document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+
+            // Réinitialiser le scroll du contenu de la nouvelle slide
+            const currentSlideElement = slides[currentSlide];
+            const slideContent = currentSlideElement.querySelector('.slide-content');
+            if (slideContent) {
+                slideContent.scrollTop = 0;
+            }
         }
 
         function nextSlide() {
@@ -3883,34 +4261,110 @@
             }
         });
 
-        // Touch support
+        // Touch support (horizontal swipe pour changer de slide)
         let touchStartX = 0;
         let touchEndX = 0;
+        let touchStartY = 0;
+        let touchEndY = 0;
 
         document.addEventListener('touchstart', (e) => {
             touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
         }, { passive: true });
 
         document.addEventListener('touchend', (e) => {
             touchEndX = e.changedTouches[0].screenX;
+            touchEndY = e.changedTouches[0].screenY;
             handleSwipe();
         }, { passive: true });
 
         function handleSwipe() {
             const swipeThreshold = 50;
-            const diff = touchStartX - touchEndX;
-            if (Math.abs(diff) > swipeThreshold) {
-                if (diff > 0) nextSlide();
-                else prevSlide();
+            const diffX = touchStartX - touchEndX;
+            const diffY = touchStartY - touchEndY;
+
+            // Déterminer si c'est un swipe horizontal ou vertical
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                // Swipe horizontal - changer de slide
+                if (Math.abs(diffX) > swipeThreshold) {
+                    if (diffX > 0) nextSlide();
+                    else prevSlide();
+                }
+            } else {
+                // Swipe vertical - vérifier si on doit changer de slide
+                if (Math.abs(diffY) > swipeThreshold) {
+                    const currentSlideElement = slides[currentSlide];
+                    const slideContent = currentSlideElement.querySelector('.slide-content');
+
+                    if (slideContent) {
+                        const isScrollable = slideContent.scrollHeight > slideContent.clientHeight;
+
+                        if (isScrollable) {
+                            const isAtTop = slideContent.scrollTop <= 0;
+                            const isAtBottom = slideContent.scrollTop + slideContent.clientHeight >= slideContent.scrollHeight - 5;
+
+                            // Ne changer de slide que si on est au bout du scroll
+                            if (diffY > 0 && isAtBottom) {
+                                nextSlide();
+                            } else if (diffY < 0 && isAtTop) {
+                                prevSlide();
+                            }
+                            // Sinon, laisser le scroll naturel se produire
+                            return;
+                        }
+                    }
+
+                    // Pas de contenu scrollable, changer de slide directement
+                    if (diffY > 0) nextSlide();
+                    else prevSlide();
+                }
             }
         }
 
-        // Mouse wheel support
+        // Mouse wheel support with smart scroll detection
         let isScrolling = false;
+        let scrollAccumulator = 0;
+        const scrollThreshold = 50; // Seuil pour déclencher le changement de slide
+
         document.addEventListener('wheel', (e) => {
+            // Trouver le slide-content actuel
+            const currentSlideElement = slides[currentSlide];
+            const slideContent = currentSlideElement.querySelector('.slide-content');
+
+            if (slideContent) {
+                const isScrollable = slideContent.scrollHeight > slideContent.clientHeight;
+
+                if (isScrollable) {
+                    const isAtTop = slideContent.scrollTop <= 0;
+                    const isAtBottom = slideContent.scrollTop + slideContent.clientHeight >= slideContent.scrollHeight - 5;
+
+                    // Si on peut encore scroller dans le contenu, laisser le scroll naturel
+                    if (e.deltaY > 0 && !isAtBottom) {
+                        // Scroll vers le bas, pas encore en bas
+                        scrollAccumulator = 0;
+                        return;
+                    }
+                    if (e.deltaY < 0 && !isAtTop) {
+                        // Scroll vers le haut, pas encore en haut
+                        scrollAccumulator = 0;
+                        return;
+                    }
+
+                    // On est au bout, accumuler le scroll pour changer de slide
+                    scrollAccumulator += Math.abs(e.deltaY);
+
+                    if (scrollAccumulator < scrollThreshold) {
+                        return;
+                    }
+                }
+            }
+
+            // Changer de slide
             if (isScrolling) return;
             isScrolling = true;
+            scrollAccumulator = 0;
             setTimeout(() => isScrolling = false, 700);
+
             if (e.deltaY > 0) nextSlide();
             else prevSlide();
         }, { passive: true });
