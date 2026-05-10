@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AYENAH — Stratégie de Communication</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style-2.css">
+</head>
+<body>
+
+    <!-- Progress bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Left nav dots -->
+    <nav class="nav-dots" id="navDots" aria-label="Navigation slides"></nav>
+
+    <!-- Slides wrapper — scroll-snap container -->
+    <div class="slides-wrapper" id="slidesWrapper">
+
+        <!-- ===== SLIDE 1: COVER ===== -->
+        <section class="slide slide-cover" data-slide="0">
+            <!-- Animated grid background -->
+            <div class="cover-grid" aria-hidden="true"></div>
+            <!-- Glowing orbs -->
+            <div class="cover-orbs" aria-hidden="true">
+                <div class="orb orb-1"></div>
+                <div class="orb orb-2"></div>
+                <div class="orb orb-3"></div>
+            </div>
+            <!-- Geometric shapes -->
+            <div class="cover-shapes" aria-hidden="true">
+                <div class="geo-shape geo-1"></div>
+                <div class="geo-shape geo-2"></div>
+                <div class="geo-shape geo-3"></div>
+                <div class="geo-shape geo-4"></div>
+            </div>
+            <!-- Corner brackets -->
+            <div class="corner-decor corner-tl" aria-hidden="true"></div>
+            <div class="corner-decor corner-br" aria-hidden="true"></div>
+            <!-- Geometric lines overlay -->
+            <div class="cover-lines" aria-hidden="true">
+                <div class="cover-line cline-1"></div>
+                <div class="cover-line cline-2"></div>
+                <div class="cover-line cline-3"></div>
+                <div class="cover-line cline-4"></div>
+            </div>
+            <header class="slide-header">
+                <div class="logo-left"><img src="images/logos/armoirie.png" alt="Armoirie Côte d'Ivoire"></div>
+                <div class="logo-right"><img src="images/logos/logo-ayenah.png" alt="AYENAH"></div>
+            </header>
+            <!-- Feature image — right side -->
+            <div class="cover-image-feature">
+                <img src="images/Ayenah.png" alt="Solidarité et unité">
+            </div>
+            <div class="slide-body">
+                <div class="slide-inner" style="align-items:flex-start">
+                    <div class="cover-badge reveal">
+                        <i class="fas fa-bullhorn"></i>
+                        Plan Stratégique de Communication · AYENAH 2026
+                    </div>
+                    <h1 class="cover-title reveal">Stratégie de<br><span class="hl">Communication</span></h1>
+                    <p class="cover-tagline reveal">
+                        Mobiliser la <strong>diaspora ivoirienne</strong> pour le développement national
+                        grâce à une communication stratégique, ciblée et impactante.
+                    </p>
+                    <div class="cover-stats reveal">
+                        <div class="cover-stat"><span class="cs-val">450K€</span><span class="cs-label">Budget</span></div>
+                        <div class="cover-stat"><span class="cs-val">24</span><span class="cs-label">Mois</span></div>
+                        <div class="cover-stat"><span class="cs-val">3</span><span class="cs-label">Piliers</span></div>
+                        <div class="cover-stat"><span class="cs-val">5</span><span class="cs-label">Continents</span></div>
+                    </div>
+                </div>
+            </div>
+        <button class="scroll-cue" onclick="window.goToSlide(1)" aria-label="Slide suivant"><i class="fas fa-chevron-down"></i></button>
+        </section>
+
+        <!-- ===== SLIDE 2: SOMMAIRE ===== -->
+        <section class="slide slide-pattern" data-slide="1">
+            <header class="slide-header">
+                <div class="logo-left"><img src="images/logos/armoirie.png" alt="Armoirie"></div>
+                <div class="logo-right"><img src="images/logos/logo-ayenah.png" alt="AYENAH"></div>
+            </header>
+            <div class="slide-body">
+                <div class="slide-inner">
+                    <div class="section-header reveal">
+                        <div class="section-badge"><i class="fas fa-list-ol"></i> Plan</div>
+                        <h2 class="section-title">Sommaire de la <span class="hl">Présentation</span></h2>
+                        <p class="section-sub">Cliquez sur une section pour y accéder directement</p>
+                    </div>
+                    <div class="sommaire-grid reveal">
+                        <div class="sommaire-item" onclick="goToSlide(2)" role="button" tabindex="0">
+                            <span class="sommaire-num">01</span><span class="sommaire-label">Contexte &amp; Défis</span>
+                        </div>
+                        <div class="sommaire-item" onclick="goToSlide(3)" role="button" tabindex="0">
+                            <span class="sommaire-num">02</span><span class="sommaire-label">Rôle de la Communication</span>
+                        </div>
+                        <div class="sommaire-item" onclick="goToSlide(4)" role="button" tabindex="0">
+                            <span class="sommaire-num">03</span><span class="sommaire-label">Enjeux Clés</span>
+                        </div>
+                        <div class="sommaire-item" onclick="goToSlide(5)" role="button" tabindex="0">
+                            <span class="sommaire-num">04</span><span class="sommaire-label">Les 3 Piliers d'AYENAH</span>
+                        </div>
+                        <div class="sommaire-item" onclick="goToSlide(6)" role="button" tabindex="0">
+                            <span class="sommaire-num">05</span><span class="sommaire-label">Cibles &amp; Canaux</span>
+                        </div>
+                        <div class="sommaire-item" onclick="goToSlide(7)" role="button" tabindex="0">
+                            <span class="sommaire-num">06</span><span class="sommaire-label">Écosystème de Communication</span>
+                        </div>
+                        <div class="sommaire-item" onclick="goToSlide(8)" role="button" tabindex="0">
+                            <span class="sommaire-num">07</span><span class="sommaire-label">Plan d'Actions (4 Phases)</span>
+                        </div>
+                        <div class="sommaire-item" onclick="goToSlide(9)" role="button" tabindex="0">
+                            <span class="sommaire-num">08</span><span class="sommaire-label">Budget Prévisionnel</span>
+                        </div>
+                        <div class="sommaire-item" onclick="goToSlide(10)" role="button" tabindex="0">
+                            <span class="sommaire-num">09</span><span class="sommaire-label">Gouvernance</span>
+                        </div>
+                        <div class="sommaire-item" onclick="goToSlide(11)" role="button" tabindex="0">
+                            <span class="sommaire-num">10</span><span class="sommaire-label">KPIs &amp; Indicateurs</span>
+                        </div>
+                        <div class="sommaire-item" onclick="goToSlide(12)" role="button" tabindex="0">
+                            <span class="sommaire-num">11</span><span class="sommaire-label">Tableau de Bord</span>
+                        </div>
+                        <div class="sommaire-item" onclick="goToSlide(13)" role="button" tabindex="0">
+                            <span class="sommaire-num">12</span><span class="sommaire-label">Conclusion</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <button class="scroll-cue" onclick="window.goToSlide(2)" aria-label="Slide suivant"><i class="fas fa-chevron-down"></i></button>
+        </section>
+
+        <!-- ===== SLIDE 3: CONTEXTE ===== -->
+        <section class="slide slide-pattern" data-slide="2">
+            <header class="slide-header">
+                <div class="logo-left"><img src="images/logos/armoirie.png" alt="Armoirie"></div>
+                <div class="logo-right"><img src="images/logos/logo-ayenah.png" alt="AYENAH"></div>
+            </header>
+            <div class="slide-body">
+                <div class="slide-inner">
+                    <div class="section-header reveal">
+                        <div class="section-badge"><i class="fas fa-info-circle"></i> Contexte</div>
+                        <h2 class="section-title">Le <span class="hl">Défi</span> d'AYENAH</h2>
+                        <p class="section-sub">Une diaspora à fort potentiel mais des défis structurels à relever</p>
+                    </div>
+                    <div class="grid-5 reveal">
+                        <div class="card">
+                            <div class="card-icon"><i class="fas fa-globe-africa"></i></div>
+                            <h3 class="card-title">Diaspora dispersée</h3>
+                            <p class="card-text">Des centaines de milliers d'Ivoiriens répartis sur <strong>5 continents</strong> : France, USA, Italie, Allemagne, Canada…</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+                            <h3 class="card-title">Confiance à construire</h3>
+                            <p class="card-text">Une diaspora qui a besoin d'être <strong>rassurée sur la crédibilité</strong> et la transparence des procédures.</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon orange"><i class="fas fa-exchange-alt"></i></div>
+                            <h3 class="card-title">Transferts insuffisants</h3>
+                            <p class="card-text">Les mécanismes de transfert <strong>ne suffisent pas</strong> — il faut des dispositifs d'accompagnement concrets.</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon"><i class="fas fa-hand-holding-usd"></i></div>
+                            <h3 class="card-title">Potentiel inexploité</h3>
+                            <p class="card-text">Des milliards de FCFA orientés vers la <strong>consommation plutôt que l'investissement</strong> productif.</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon"><i class="fas fa-user-graduate"></i></div>
+                            <h3 class="card-title">Compétences disponibles</h3>
+                            <p class="card-text">Médecins, ingénieurs, entrepreneurs — un <strong>capital humain d'excellence</strong> prêt à contribuer.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <button class="scroll-cue" onclick="window.goToSlide(3)" aria-label="Slide suivant"><i class="fas fa-chevron-down"></i></button>
+        </section>
+
+        <!-- ===== SLIDE 4: RÔLE DE LA COMMUNICATION ===== -->
+        <section class="slide slide-pattern" data-slide="3">
+            <header class="slide-header">
+                <div class="logo-left"><img src="images/logos/armoirie.png" alt="Armoirie"></div>
+                <div class="logo-right"><img src="images/logos/logo-ayenah.png" alt="AYENAH"></div>
+            </header>
+            <div class="slide-body">
+                <div class="slide-inner">
+                    <div class="section-header reveal">
+                        <div class="section-badge"><i class="fas fa-bullhorn"></i> Stratégie</div>
+                        <h2 class="section-title">Le Rôle <span class="hl">Stratégique</span> de la Communication</h2>
+                        <p class="section-sub">Une fonction centrale qui conditionne l'atteinte des objectifs</p>
+                    </div>
+                    <div class="grid-2x2 reveal">
+                        <div class="card">
+                            <div class="card-header-row">
+                                <div class="card-icon"><i class="fas fa-eye"></i></div>
+                                <h3 class="card-title">Faire Connaître</h3>
+                            </div>
+                            <p class="card-text">Créer la <strong>notoriété d'AYENAH</strong> auprès des cibles prioritaires pour que la diaspora sache que ce dispositif existe.</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-header-row">
+                                <div class="card-icon"><i class="fas fa-heart"></i></div>
+                                <h3 class="card-title">Faire Adhérer</h3>
+                            </div>
+                            <p class="card-text">Construire la <strong>confiance</strong> et susciter l'engagement. Transformer l'intérêt en candidatures concrètes.</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-header-row">
+                                <div class="card-icon"><i class="fas fa-hands-helping"></i></div>
+                                <h3 class="card-title">Faire Participer</h3>
+                            </div>
+                            <p class="card-text">Mobiliser les <strong>relais et ambassadeurs</strong> pour créer une dynamique collective qui amplifie le message.</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-header-row">
+                                <div class="card-icon"><i class="fas fa-trophy"></i></div>
+                                <h3 class="card-title">Faire Savoir</h3>
+                            </div>
+                            <p class="card-text">Valoriser les <strong>réalisations concrètes</strong> pour démontrer l'impact et crédibiliser le modèle auprès de tous.</p>
+                        </div>
+                    </div>
+                    <div class="key-message reveal">
+                        <strong>La communication n'est pas un accessoire</strong> — c'est le moteur qui permet à AYENAH d'atteindre sa cible, de générer des candidatures et de démontrer ses résultats.
+                    </div>
+                </div>
+            </div>
+        <button class="scroll-cue" onclick="window.goToSlide(4)" aria-label="Slide suivant"><i class="fas fa-chevron-down"></i></button>
+        </section>
+
+        <!-- ===== SLIDE 5: ENJEUX ===== -->
+        <section class="slide slide-pattern" data-slide="4">
+            <header class="slide-header">
+                <div class="logo-left"><img src="images/logos/armoirie.png" alt="Armoirie"></div>
+                <div class="logo-right"><img src="images/logos/logo-ayenah.png" alt="AYENAH"></div>
+            </header>
+            <div class="slide-body">
+                <div class="slide-inner">
+                    <div class="section-header reveal">
+                        <div class="section-badge"><i class="fas fa-lightbulb"></i> Enjeux</div>
+                        <h2 class="section-title">Les <span class="hl">Enjeux</span> Clés du Projet</h2>
+                        <p class="section-sub">Ce que la communication permet de résoudre pour garantir le succès</p>
+                    </div>
+                    <div class="grid-5 reveal">
+                        <div class="card">
+                            <div class="card-icon"><i class="fas fa-handshake"></i></div>
+                            <h3 class="card-title">Enjeu de Confiance</h3>
+                            <p class="card-text">Démontrer que ce dispositif est <strong>crédible, transparent et accessible</strong>. La communication construit cette confiance par la preuve.</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon"><i class="fas fa-bullseye"></i></div>
+                            <h3 class="card-title">Enjeu de Mobilisation</h3>
+                            <p class="card-text">Toucher, informer et engager des <strong>communautés dispersées</strong> sur plusieurs continents avec des réalités diverses.</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon"><i class="fas fa-university"></i></div>
+                            <h3 class="card-title">Enjeu Institutionnel</h3>
+                            <p class="card-text">Démontrer la <strong>compétence de la DGIE</strong> à gérer ce type de fonds dans le cadre de la <strong>PNGDI</strong>.</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon"><i class="fas fa-chart-bar"></i></div>
+                            <h3 class="card-title">Enjeu de Démonstration</h3>
+                            <p class="card-text">Produire rapidement des <strong>résultats concrets et visibles</strong> pour légitimer le modèle et préparer sa mise à l'échelle.</p>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon"><i class="fas fa-book"></i></div>
+                            <h3 class="card-title">Enjeu de Capitalisation</h3>
+                            <p class="card-text">Documenter l'expérience pour en faire un <strong>modèle reproductible</strong>, au niveau national et dans la sous-région.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <button class="scroll-cue" onclick="window.goToSlide(5)" aria-label="Slide suivant"><i class="fas fa-chevron-down"></i></button>
+        </section>
+
+        <!-- ===== SLIDE 6: LES 3 PILIERS ===== -->
+        <section class="slide slide-pattern" data-slide="5">
+            <header class="slide-header">
+                <div class="logo-left"><img src="images/logos/armoirie.png" alt="Armoirie"></div>
+                <div class="logo-right"><img src="images/logos/logo-ayenah.png" alt="AYENAH"></div>
+            </header>
+            <div class="slide-body">
+                <div class="slide-inner">
+                    <div class="section-header reveal">
+                        <div class="section-badge"><i class="fas fa-cubes"></i> Dispositif</div>
+                        <h2 class="section-title">Les <span class="hl">3 Piliers</span> d'AYENAH</h2>
+                        <p class="section-sub">Chaque pilier nécessite une communication dédiée pour atteindre ses objectifs</p>
+                    </div>
+                    <div class="pillars-grid reveal">
+                        <div class="pillar">
+                            <div class="pillar-num">1</div>
+                            <h3 class="pillar-title">Initiatives Locales</h3>
+                            <p class="pillar-text">Cofinancement de projets de développement portés conjointement par des associations de la diaspora et des structures locales.</p>
+                            <span class="pillar-badge">Jusqu'à 50 000 € (70% max)</span>
+                        </div>
+                        <div class="pillar">
+                            <div class="pillar-num">2</div>
+                            <h3 class="pillar-title">Expertise Diaspora</h3>
+                            <p class="pillar-text">Mobilisation des compétences des professionnels ivoiriens de l'extérieur pour des missions d'appui technique ciblées.</p>
+                            <span class="pillar-badge">Frais de mission pris en charge</span>
+                        </div>
+                        <div class="pillar">
+                            <div class="pillar-num">3</div>
+                            <h3 class="pillar-title">Dialogue Institutionnel</h3>
+                            <p class="pillar-text">Renforcement des capacités de la DGIE et structuration d'un cadre d'échange pérenne entre l'État et sa diaspora.</p>
+                            <span class="pillar-badge">Formations &amp; ateliers</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <button class="scroll-cue" onclick="window.goToSlide(6)" aria-label="Slide suivant"><i class="fas fa-chevron-down"></i></button>
+        </section>
+
+        <!-- ===== SLIDE 7: CIBLES & CANAUX ===== -->
+        <section class="slide slide-pattern" data-slide="6">
+            <header class="slide-header">
+                <div class="logo-left"><img src="images/logos/armoirie.png" alt="Armoirie"></div>
+                <div class="logo-right"><img src="images/logos/logo-ayenah.png" alt="AYENAH"></div>
+            </header>
+            <div class="slide-body">
+                <div class="slide-inner">
+                    <div class="section-header reveal">
+                        <div class="section-badge"><i class="fas fa-users"></i> Cibles</div>
+                        <h2 class="section-title">Nos <span class="hl">Cibles</span> et leurs Canaux</h2>
+                        <p class="section-sub">Une communication adaptée à chaque segment pour maximiser l'impact</p>
+                    </div>
+                    <div class="targets-grid reveal">
+                        <div class="target-card">
+                            <div class="target-icon"><i class="fas fa-users-cog"></i></div>
+                            <h3 class="target-title">Associations Diaspora</h3>
+                            <div class="channels">
+                                <span class="channel-tag">Facebook</span>
+                                <span class="channel-tag">WhatsApp</span>
+                                <span class="channel-tag">Rencontres</span>
+                                <span class="channel-tag">Email</span>
+                            </div>
+                        </div>
+                        <div class="target-card">
+                            <div class="target-icon"><i class="fas fa-user-tie"></i></div>
+                            <h3 class="target-title">Experts &amp; Professionnels</h3>
+                            <div class="channels">
+                                <span class="channel-tag">LinkedIn</span>
+                                <span class="channel-tag">WhatsApp</span>
+                                <span class="channel-tag">Facebook</span>
+                                <span class="channel-tag">Webinaires</span>
+                                <span class="channel-tag">Email</span>
+                                <span class="channel-tag">Presse pro</span>
+                            </div>
+                        </div>
+                        <div class="target-card">
+                            <div class="target-icon"><i class="fas fa-landmark"></i></div>
+                            <h3 class="target-title">Acteurs Locaux CI</h3>
+                            <div class="channels">
+                                <span class="channel-tag">Radio locale</span>
+                                <span class="channel-tag">Presse pro</span>
+                                <span class="channel-tag">Télévisions</span>
+                                <span class="channel-tag">Ateliers</span>
+                                <span class="channel-tag">Collectivités</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="key-message reveal">
+                        <strong>Chaque cible a ses habitudes</strong> — la communication AYENAH s'adapte en allant à la rencontre des publics là où ils se trouvent, avec les formats qu'ils consomment.
+                    </div>
+                </div>
+            </div>
+        <button class="scroll-cue" onclick="window.goToSlide(7)" aria-label="Slide suivant"><i class="fas fa-chevron-down"></i></button>
+        </section>
+
+        <!-- ===== SLIDE 8: ÉCOSYSTÈME ===== -->
+        <section class="slide slide-pattern" data-slide="7">
+            <header class="slide-header">
+                <div class="logo-left"><img src="images/logos/armoirie.png" alt="Armoirie"></div>
+                <div class="logo-right"><img src="images/logos/logo-ayenah.png" alt="AYENAH"></div>
+            </header>
+            <div class="slide-body">
+                <div class="slide-inner">
+                    <div class="section-header reveal">
+                        <div class="section-badge"><i class="fas fa-network-wired"></i> Écosystème</div>
+                        <h2 class="section-title">L'<span class="hl">Écosystème</span> de Communication</h2>
+                        <p class="section-sub">5 piliers complémentaires qui fonctionnent en synergie</p>
+                    </div>
+                    <div class="ecosystem-grid reveal">
+                        <div class="eco-item">
+                            <div class="eco-icon"><i class="fas fa-laptop"></i></div>
+                            <h3 class="eco-title">Digital</h3>
+                            <p class="eco-desc">Site web ayenah.ci, réseaux sociaux, WhatsApp, newsletter</p>
+                        </div>
+                        <div class="eco-item">
+                            <div class="eco-icon"><i class="fas fa-newspaper"></i></div>
+                            <h3 class="eco-title">Presse &amp; RP</h3>
+                            <p class="eco-desc">Médias nationaux, médias diasporiques, partenariats</p>
+                        </div>
+                        <div class="eco-item">
+                            <div class="eco-icon"><i class="fas fa-user-friends"></i></div>
+                            <h3 class="eco-title">Proximité</h3>
+                            <p class="eco-desc">Relais associatifs, collectivités locales</p>
+                        </div>
+                        <div class="eco-item">
+                            <div class="eco-icon"><i class="fas fa-calendar-check"></i></div>
+                            <h3 class="eco-title">Événementiel</h3>
+                            <p class="eco-desc">Forums diaspora-État, ateliers régionaux, webinaires</p>
+                        </div>
+                        <div class="eco-item">
+                            <div class="eco-icon"><i class="fas fa-photo-video"></i></div>
+                            <h3 class="eco-title">Contenus</h3>
+                            <p class="eco-desc">Vidéos témoignages, infographies, kits communication</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <button class="scroll-cue" onclick="window.goToSlide(8)" aria-label="Slide suivant"><i class="fas fa-chevron-down"></i></button>
+        </section>
+
+        <!-- ===== SLIDE 9: PLAN D'ACTIONS ===== -->
+        <section class="slide slide-pattern" data-slide="8">
+            <header class="slide-header">
+                <div class="logo-left"><img src="images/logos/armoirie.png" alt="Armoirie"></div>
+                <div class="logo-right"><img src="images/logos/logo-ayenah.png" alt="AYENAH"></div>
+            </header>
+            <div class="slide-body">
+                <div class="slide-inner">
+                    <div class="section-header reveal">
+                        <div class="section-badge"><i class="fas fa-tasks"></i> Roadmap</div>
+                        <h2 class="section-title">Plan d'Actions en <span class="hl">4 Phases</span></h2>
+                        <p class="section-sub">Une montée en puissance progressive sur 24 mois</p>
+                    </div>
+                    <div class="timeline reveal">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-phase">Phase 0</span>
+                                <h3 class="timeline-title">Préparation</h3>
+                                <p class="timeline-desc">Site web opérationnel, contenus prêts, réseau de relais constitué, gouvernance en place</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-phase">Phase 1</span>
+                                <h3 class="timeline-title">Lancement</h3>
+                                <p class="timeline-desc">Événement inaugural, activation digitale, campagne presse, premiers ateliers régionaux</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-phase">Phase 2</span>
+                                <h3 class="timeline-title">Mobilisation</h3>
+                                <p class="timeline-desc">Animation continue, accompagnement candidatures, forums diaspora, contenus de preuve</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-phase">Phase 3</span>
+                                <h3 class="timeline-title">Valorisation</h3>
+                                <p class="timeline-desc">Success stories, bilan consolidé, conférence annuelle, capitalisation des enseignements</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <button class="scroll-cue" onclick="window.goToSlide(9)" aria-label="Slide suivant"><i class="fas fa-chevron-down"></i></button>
+        </section>
+
+        <!-- ===== SLIDE 10: BUDGET ===== -->
+        <section class="slide slide-pattern" data-slide="9">
+            <header class="slide-header">
+                <div class="logo-left"><img src="images/logos/armoirie.png" alt="Armoirie"></div>
+                <div class="logo-right"><img src="images/logos/logo-ayenah.png" alt="AYENAH"></div>
+            </header>
+            <div class="slide-body">
+                <div class="slide-inner">
+                    <div class="section-header reveal">
+                        <div class="section-badge"><i class="fas fa-euro-sign"></i> Budget</div>
+                        <h2 class="section-title">Répartition <span class="hl">Budgétaire</span></h2>
+                        <p class="section-sub">Un investissement stratégique réparti sur les piliers de l'écosystème</p>
+                    </div>
+                    <div class="budget-container reveal">
+                        <div class="budget-chart-wrapper">
+                            <div class="budget-chart">
+                                <svg viewBox="0 0 200 200" width="100%" height="100%" role="img" aria-label="Graphique répartition budget">
+                                    <circle cx="100" cy="100" r="80" fill="none" stroke="#1B8C4E" stroke-width="28"
+                                        stroke-dasharray="125.6 376.8" stroke-dashoffset="0" transform="rotate(-90 100 100)">
+                                        <animate attributeName="stroke-dasharray" from="0 502.4" to="125.6 376.8" dur="1s" fill="freeze"/>
+                                    </circle>
+                                    <circle cx="100" cy="100" r="80" fill="none" stroke="#2ECC71" stroke-width="28"
+                                        stroke-dasharray="125.6 376.8" stroke-dashoffset="-125.6" transform="rotate(-90 100 100)">
+                                        <animate attributeName="stroke-dasharray" from="0 502.4" to="125.6 376.8" dur="1s" begin="0.2s" fill="freeze"/>
+                                    </circle>
+                                    <circle cx="100" cy="100" r="80" fill="none" stroke="#F39C12" stroke-width="28"
+                                        stroke-dasharray="100.48 401.92" stroke-dashoffset="-251.2" transform="rotate(-90 100 100)">
+                                        <animate attributeName="stroke-dasharray" from="0 502.4" to="100.48 401.92" dur="1s" begin="0.4s" fill="freeze"/>
+                                    </circle>
+                                    <circle cx="100" cy="100" r="80" fill="none" stroke="#27AE60" stroke-width="28"
+                                        stroke-dasharray="100.48 401.92" stroke-dashoffset="-351.68" transform="rotate(-90 100 100)">
+                                        <animate attributeName="stroke-dasharray" from="0 502.4" to="100.48 401.92" dur="1s" begin="0.6s" fill="freeze"/>
+                                    </circle>
+                                    <circle cx="100" cy="100" r="80" fill="none" stroke="#16A085" stroke-width="28"
+                                        stroke-dasharray="50.24 452.16" stroke-dashoffset="-452.16" transform="rotate(-90 100 100)">
+                                        <animate attributeName="stroke-dasharray" from="0 502.4" to="50.24 452.16" dur="1s" begin="0.8s" fill="freeze"/>
+                                    </circle>
+                                    <circle cx="100" cy="100" r="64" fill="white"/>
+                                </svg>
+                                <div class="budget-center">
+                                    <span class="budget-center-label">Budget Com</span>
+                                    <span class="budget-center-val">100%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="budget-items">
+                            <div class="budget-item">
+                                <div class="budget-color" style="background:#1B8C4E"></div>
+                                <div class="budget-info">
+                                    <h4>Digital</h4>
+                                    <span>Site, réseaux, outils</span>
+                                </div>
+                                <span class="budget-percent">25%</span>
+                            </div>
+                            <div class="budget-item">
+                                <div class="budget-color" style="background:#2ECC71"></div>
+                                <div class="budget-info">
+                                    <h4>Production Contenus</h4>
+                                    <span>Vidéos, graphisme, rédaction</span>
+                                </div>
+                                <span class="budget-percent">25%</span>
+                            </div>
+                            <div class="budget-item">
+                                <div class="budget-color" style="background:#F39C12"></div>
+                                <div class="budget-info">
+                                    <h4>Événementiel</h4>
+                                    <span>Forums, ateliers, conférences</span>
+                                </div>
+                                <span class="budget-percent">20%</span>
+                            </div>
+                            <div class="budget-item">
+                                <div class="budget-color" style="background:#27AE60"></div>
+                                <div class="budget-info">
+                                    <h4>Supports &amp; Outils</h4>
+                                    <span>Impression, kits, goodies</span>
+                                </div>
+                                <span class="budget-percent">20%</span>
+                            </div>
+                            <div class="budget-item">
+                                <div class="budget-color" style="background:#16A085"></div>
+                                <div class="budget-info">
+                                    <h4>Presse &amp; Divers</h4>
+                                    <span>RP, partenariats, imprévus</span>
+                                </div>
+                                <span class="budget-percent">10%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <button class="scroll-cue" onclick="window.goToSlide(10)" aria-label="Slide suivant"><i class="fas fa-chevron-down"></i></button>
+        </section>
+
+        <!-- ===== SLIDE 11: GOUVERNANCE ===== -->
+        <section class="slide slide-pattern" data-slide="10">
+            <header class="slide-header">
+                <div class="logo-left"><img src="images/logos/armoirie.png" alt="Armoirie"></div>
+                <div class="logo-right"><img src="images/logos/logo-ayenah.png" alt="AYENAH"></div>
+            </header>
+            <div class="slide-body">
+                <div class="slide-inner">
+                    <div class="section-header reveal">
+                        <div class="section-badge"><i class="fas fa-sitemap"></i> Organisation</div>
+                        <h2 class="section-title"><span class="hl">Gouvernance</span> de la Communication</h2>
+                        <p class="section-sub">Une organisation claire pour garantir réactivité et cohérence</p>
+                    </div>
+                    <div class="governance-grid reveal">
+                        <div class="gov-card">
+                            <div class="gov-icon"><i class="fas fa-chess-king"></i></div>
+                            <h3 class="gov-title">Comité de Pilotage</h3>
+                            <p class="gov-text">Valide les orientations stratégiques et les décisions engageant l'image institutionnelle du projet.</p>
+                        </div>
+                        <div class="gov-card">
+                            <div class="gov-icon"><i class="fas fa-cogs"></i></div>
+                            <h3 class="gov-title">Cellule de Coordination</h3>
+                            <p class="gov-text">Assure le pilotage opérationnel : priorités, allocation des moyens, validation des contenus et reporting.</p>
+                        </div>
+                        <div class="gov-card">
+                            <div class="gov-icon"><i class="fas fa-check-double"></i></div>
+                            <h3 class="gov-title">Circuit de Validation</h3>
+                            <p class="gov-text">3 niveaux selon l'enjeu : contenus courants, élaborés (48–72h), stratégiques (validation politique).</p>
+                        </div>
+                    </div>
+                    <div class="key-message reveal">
+                        <strong>Une communication pilotée, pas improvisée</strong> — calendrier éditorial partagé, tableau de bord des indicateurs, outils de programmation et de suivi.
+                    </div>
+                </div>
+            </div>
+        <button class="scroll-cue" onclick="window.goToSlide(11)" aria-label="Slide suivant"><i class="fas fa-chevron-down"></i></button>
+        </section>
+
+        <!-- ===== SLIDE 12: KPIs ===== -->
+        <section class="slide slide-pattern" data-slide="11">
+            <header class="slide-header">
+                <div class="logo-left"><img src="images/logos/armoirie.png" alt="Armoirie"></div>
+                <div class="logo-right"><img src="images/logos/logo-ayenah.png" alt="AYENAH"></div>
+            </header>
+            <div class="slide-body">
+                <div class="slide-inner">
+                    <div class="section-header reveal">
+                        <div class="section-badge"><i class="fas fa-chart-pie"></i> Mesure</div>
+                        <h2 class="section-title">Indicateurs de <span class="hl">Performance</span></h2>
+                        <p class="section-sub">Un suivi rigoureux pour piloter et optimiser les actions</p>
+                    </div>
+                    <div class="kpis-grid reveal">
+                        <div class="kpi-cat">
+                            <div class="kpi-cat-head">
+                                <div class="kpi-cat-icon"><i class="fas fa-eye"></i></div>
+                                <h3 class="kpi-cat-title">Visibilité &amp; Audience</h3>
+                            </div>
+                            <ul class="kpi-list">
+                                <li class="kpi-row"><span class="kpi-name">Visiteurs site web</span><span class="kpi-val">Mensuel</span></li>
+                                <li class="kpi-row"><span class="kpi-name">Abonnés réseaux sociaux</span><span class="kpi-val">Mensuel</span></li>
+                                <li class="kpi-row"><span class="kpi-name">Abonnés WhatsApp</span><span class="kpi-val">Mensuel</span></li>
+                                <li class="kpi-row"><span class="kpi-name">Vues vidéos YouTube</span><span class="kpi-val">Mensuel</span></li>
+                            </ul>
+                        </div>
+                        <div class="kpi-cat">
+                            <div class="kpi-cat-head">
+                                <div class="kpi-cat-icon"><i class="fas fa-hand-pointer"></i></div>
+                                <h3 class="kpi-cat-title">Engagement</h3>
+                            </div>
+                            <ul class="kpi-list">
+                                <li class="kpi-row"><span class="kpi-name">Taux d'engagement RS</span><span class="kpi-val">Mensuel</span></li>
+                                <li class="kpi-row"><span class="kpi-name">Partages &amp; commentaires</span><span class="kpi-val">Mensuel</span></li>
+                                <li class="kpi-row"><span class="kpi-name">Taux ouverture newsletter</span><span class="kpi-val">Par envoi</span></li>
+                                <li class="kpi-row"><span class="kpi-name">Scans QR Codes</span><span class="kpi-val">Campagne</span></li>
+                            </ul>
+                        </div>
+                        <div class="kpi-cat">
+                            <div class="kpi-cat-head">
+                                <div class="kpi-cat-icon"><i class="fas fa-bullseye"></i></div>
+                                <h3 class="kpi-cat-title">Conversion</h3>
+                            </div>
+                            <ul class="kpi-list">
+                                <li class="kpi-row"><span class="kpi-name">Dossiers projets déposés</span><span class="kpi-val">Par appel</span></li>
+                                <li class="kpi-row"><span class="kpi-name">Experts inscrits</span><span class="kpi-val">Trimestriel</span></li>
+                                <li class="kpi-row"><span class="kpi-name">Participants événements</span><span class="kpi-val">Par event</span></li>
+                                <li class="kpi-row"><span class="kpi-name">Retombées presse</span><span class="kpi-val">Trimestriel</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <button class="scroll-cue" onclick="window.goToSlide(12)" aria-label="Slide suivant"><i class="fas fa-chevron-down"></i></button>
+        </section>
+
+        <!-- ===== SLIDE 13: TABLEAU DE BORD ===== -->
+        <section class="slide slide-pattern" data-slide="12">
+            <header class="slide-header">
+                <div class="logo-left"><img src="images/logos/armoirie.png" alt="Armoirie"></div>
+                <div class="logo-right"><img src="images/logos/logo-ayenah.png" alt="AYENAH"></div>
+            </header>
+            <div class="slide-body">
+                <div class="slide-inner">
+                    <div class="section-header reveal">
+                        <div class="section-badge"><i class="fas fa-tachometer-alt"></i> Dashboard</div>
+                        <h2 class="section-title">Tableau de Bord <span class="hl">Synthétique</span></h2>
+                        <p class="section-sub">Les indicateurs clés pour le reporting aux partenaires</p>
+                    </div>
+                    <div class="stats-grid reveal">
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-globe"></i></div>
+                            <div class="stat-val">10K+</div>
+                            <div class="stat-label">Visiteurs mensuels site</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-users"></i></div>
+                            <div class="stat-val">5K+</div>
+                            <div class="stat-label">Communauté digitale</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-file-alt"></i></div>
+                            <div class="stat-val">120+</div>
+                            <div class="stat-label">Candidatures reçues</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-newspaper"></i></div>
+                            <div class="stat-val">30+</div>
+                            <div class="stat-label">Retombées médias</div>
+                        </div>
+                    </div>
+                    <div class="kpis-grid reveal">
+                        <div class="kpi-cat">
+                            <div class="kpi-cat-head">
+                                <div class="kpi-cat-icon"><i class="fas fa-file-contract"></i></div>
+                                <h3 class="kpi-cat-title">Reporting PTF</h3>
+                            </div>
+                            <ul class="kpi-list">
+                                <li class="kpi-row"><span class="kpi-name">Visibilité &amp; notoriété</span><span class="kpi-val">✓</span></li>
+                                <li class="kpi-row"><span class="kpi-name">Mobilisation diaspora</span><span class="kpi-val">✓</span></li>
+                                <li class="kpi-row"><span class="kpi-name">Capitalisation</span><span class="kpi-val">✓</span></li>
+                            </ul>
+                        </div>
+                        <div class="kpi-cat">
+                            <div class="kpi-cat-head">
+                                <div class="kpi-cat-icon"><i class="fas fa-clipboard-check"></i></div>
+                                <h3 class="kpi-cat-title">Conformité</h3>
+                            </div>
+                            <ul class="kpi-list">
+                                <li class="kpi-row"><span class="kpi-name">Charte graphique</span><span class="kpi-val">✓</span></li>
+                                <li class="kpi-row"><span class="kpi-name">Logos partenaires</span><span class="kpi-val">✓</span></li>
+                                <li class="kpi-row"><span class="kpi-name">Mentions légales</span><span class="kpi-val">✓</span></li>
+                            </ul>
+                        </div>
+                        <div class="kpi-cat">
+                            <div class="kpi-cat-head">
+                                <div class="kpi-cat-icon"><i class="fas fa-sync-alt"></i></div>
+                                <h3 class="kpi-cat-title">Fréquence</h3>
+                            </div>
+                            <ul class="kpi-list">
+                                <li class="kpi-row"><span class="kpi-name">Reporting hebdo</span><span class="kpi-val">Synthèse</span></li>
+                                <li class="kpi-row"><span class="kpi-name">Bilan mensuel</span><span class="kpi-val">Complet</span></li>
+                                <li class="kpi-row"><span class="kpi-name">Rapport trimestriel</span><span class="kpi-val">PTF</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <button class="scroll-cue" onclick="window.goToSlide(13)" aria-label="Slide suivant"><i class="fas fa-chevron-down"></i></button>
+        </section>
+
+        <!-- ===== SLIDE 14: CONCLUSION ===== -->
+        <section class="slide slide-pattern" data-slide="13">
+            <header class="slide-header">
+                <div class="logo-left"><img src="images/logos/armoirie.png" alt="Armoirie"></div>
+                <div class="logo-right"><img src="images/logos/logo-ayenah.png" alt="AYENAH"></div>
+            </header>
+            <div class="slide-body">
+                <div class="slide-inner">
+                    <div class="section-header reveal">
+                        <div class="section-badge"><i class="fas fa-flag-checkered"></i> Conclusion</div>
+                        <h2 class="section-title">La Communication, <span class="hl">Clé du Succès</span></h2>
+                    </div>
+                    <div class="conclusion-box reveal">
+                        <p class="conclusion-quote">"AYENAH repose sur la participation volontaire d'acteurs dispersés de par le monde. Sans communication efficace et ciblée, le meilleur dispositif reste invisible."</p>
+                        <p class="conclusion-txt">La communication n'est pas une dépense accessoire — c'est <strong>l'investissement stratégique</strong> qui permet à AYENAH de remplir sa mission.</p>
+                    </div>
+                    <div class="stats-grid reveal">
+                        <div class="stat-card">
+                            <div class="stat-val">450K€</div>
+                            <div class="stat-label">Budget projet</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-val">24</div>
+                            <div class="stat-label">Mois</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-val">3</div>
+                            <div class="stat-label">Piliers</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-val">∞</div>
+                            <div class="stat-label">Impact potentiel</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <button class="scroll-cue" onclick="window.goToSlide(14)" aria-label="Slide suivant"><i class="fas fa-chevron-down"></i></button>
+        </section>
+
+        <!-- ===== SLIDE 15: MERCI ===== -->
+        <section class="slide slide-merci" data-slide="14">
+            <header class="slide-header">
+                <div class="logo-left"><img src="images/logos/armoirie.png" alt="Armoirie"></div>
+                <div class="logo-right"><img src="images/logos/logo-ayenah.png" alt="AYENAH"></div>
+            </header>
+            <!-- Background orbs -->
+            <div class="merci-orbs" aria-hidden="true">
+                <div class="merci-orb merci-orb-1"></div>
+                <div class="merci-orb merci-orb-2"></div>
+                <div class="merci-orb merci-orb-3"></div>
+            </div>
+            <div class="slide-body">
+                <div class="merci-body">
+                    <div class="merci-emoji reveal">🙏</div>
+                    <h1 class="merci-title reveal">Merci !</h1>
+                    <p class="merci-sub reveal">Pour votre attention et votre engagement</p>
+                    <div class="merci-contacts reveal">
+                        <div class="merci-contact"><i class="fas fa-globe"></i><span>ayenah.ci</span></div>
+                        <div class="merci-contact"><i class="fas fa-envelope"></i><span>contact@ayenah.ci</span></div>
+                        <div class="merci-contact"><i class="fab fa-linkedin"></i><span>AYENAH</span></div>
+                        <div class="merci-contact"><i class="fab fa-facebook"></i><span>AYENAH Officiel</span></div>
+                    </div>
+                    <div class="merci-actions reveal">
+                        <a href="PRÉAMBULE.docx" download class="btn-primary">
+                            <i class="fas fa-file-word"></i>
+                            <span>Télécharger le Plan Stratégique</span>
+                            <i class="fas fa-download"></i>
+                        </a>
+                        <a href="plan-taches.html" class="btn-secondary">
+                            <i class="fas fa-tasks"></i>
+                            <span>Accéder au Suivi des Tâches</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <p class="merci-tagline reveal">Ensemble, mobilisons la diaspora ivoirienne pour construire un avenir commun.</p>
+                    <div class="merci-stats reveal">
+                        <div class="merci-stat"><span class="merci-stat-val">450K€</span><span class="merci-stat-lbl">Budget</span></div>
+                        <div class="merci-stat-sep"></div>
+                        <div class="merci-stat"><span class="merci-stat-val">24</span><span class="merci-stat-lbl">Mois</span></div>
+                        <div class="merci-stat-sep"></div>
+                        <div class="merci-stat"><span class="merci-stat-val">5</span><span class="merci-stat-lbl">Continents</span></div>
+                        <div class="merci-stat-sep"></div>
+                        <div class="merci-stat"><span class="merci-stat-val">3</span><span class="merci-stat-lbl">Piliers</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div><!-- end .slides-wrapper -->
+
+    <!-- Fixed bottom bar -->
+    <div class="bottom-bar" id="bottomBar">
+        <div class="bottom-partners">
+            <img src="images/logos/logo-dgie.png" alt="DGIE">
+            <img src="images/logos/crpm.png" alt="CRPM">
+            <img src="images/logos/Ef-logo-2020.png" alt="Expertise France">
+            <img src="images/logos/afd.png" alt="AFD" style="border-radius:4px">
+        </div>
+        <div class="bottom-right">
+            <span class="slide-counter" id="slideCounter">1 / 15</span>
+            <button class="nav-btn" id="prevBtn" title="Précédent (←)" aria-label="Précédent">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="nav-btn" id="nextBtn" title="Suivant (→)" aria-label="Suivant">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+    /* ============================================================
+       Slide Presentation Controller — scroll-snap based
+       JS role: sync UI only (dots, counter, progress, buttons).
+       Scroll-snap handles the actual movement natively.
+    ============================================================ */
+    (function () {
+        'use strict';
+
+        var slides      = Array.from(document.querySelectorAll('.slide'));
+        var total       = slides.length;
+        var current     = 0;
+        var progressBar = document.getElementById('progressBar');
+        var counter     = document.getElementById('slideCounter');
+        var prevBtn     = document.getElementById('prevBtn');
+        var nextBtn     = document.getElementById('nextBtn');
+        var dotsEl      = document.getElementById('navDots');
+        var bottomBar   = document.getElementById('bottomBar');
+        var wrapper     = document.getElementById('slidesWrapper');
+
+        /* Build nav dots using DOM APIs (no innerHTML) */
+        function buildDots() {
+            while (dotsEl.firstChild) dotsEl.removeChild(dotsEl.firstChild);
+            slides.forEach(function (_, i) {
+                var btn = document.createElement('button');
+                btn.className = i === 0 ? 'nav-dot active' : 'nav-dot';
+                btn.title = 'Slide ' + (i + 1);
+                btn.setAttribute('aria-label', 'Aller au slide ' + (i + 1));
+                btn.addEventListener('click', function () { goTo(i); });
+                dotsEl.appendChild(btn);
+            });
+        }
+
+        /* IntersectionObserver: detect which slide is ≥50% visible */
+        function observe() {
+            var obs = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) {
+                    if (e.isIntersecting && e.intersectionRatio >= 0.5) {
+                        var idx = slides.indexOf(e.target);
+                        if (idx !== -1) {
+                            current = idx;
+                            syncUI(idx);
+                            e.target.classList.add('visible');
+                        }
+                    }
+                });
+            }, { threshold: 0.5 });
+            slides.forEach(function (s) { obs.observe(s); });
+        }
+
+        /* Keyboard navigation */
+        function bindKeys() {
+            document.addEventListener('keydown', function (e) {
+                if (e.target.isContentEditable || e.target.tagName === 'INPUT') return;
+                switch (e.key) {
+                    case 'ArrowDown': case 'ArrowRight': case 'PageDown': case ' ':
+                        e.preventDefault(); goTo(current + 1); break;
+                    case 'ArrowUp': case 'ArrowLeft': case 'PageUp':
+                        e.preventDefault(); goTo(current - 1); break;
+                    case 'Home': e.preventDefault(); goTo(0); break;
+                    case 'End':  e.preventDefault(); goTo(total - 1); break;
+                }
+            });
+        }
+
+        /* Navigate to slide index */
+        function goTo(idx) {
+            if (idx < 0 || idx >= total) return;
+            slides[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        /* Update all UI elements */
+        function syncUI(idx) {
+            progressBar.style.width = ((idx + 1) / total * 100) + '%';
+            counter.textContent = (idx + 1) + ' / ' + total;
+
+            Array.from(dotsEl.querySelectorAll('.nav-dot')).forEach(function (d, i) {
+                if (i === idx) { d.classList.add('active'); }
+                else           { d.classList.remove('active'); }
+            });
+
+            prevBtn.disabled = idx === 0;
+            nextBtn.disabled = idx === total - 1;
+
+            /* Dark bottom bar on cover (0) and merci (last slide) */
+            if (idx === 0 || idx === total - 1) {
+                bottomBar.classList.add('dark');
+            } else {
+                bottomBar.classList.remove('dark');
+            }
+        }
+
+        /* Inject floating background decorations into each light slide */
+        function buildDecor() {
+            var decorDefs = [
+                ['decor-element', 'decor-circle', 'decor-1'],
+                ['decor-element', 'decor-ring',   'decor-2'],
+                ['decor-element', 'decor-ring',   'decor-3'],
+                ['decor-element', 'decor-circle', 'decor-4'],
+                ['decor-element', 'decor-circle', 'decor-5'],
+                ['decor-element', 'decor-square', 'decor-6'],
+                ['decor-element', 'decor-circle', 'decor-7'],
+                ['decor-element', 'decor-ring',   'decor-8']
+            ];
+            slides.forEach(function (slide, idx) {
+                if (idx === 0 || idx === total - 1) return;
+                var container = document.createElement('div');
+                container.className = 'floating-decor';
+                decorDefs.forEach(function (classes) {
+                    var el = document.createElement('div');
+                    el.className = classes.join(' ');
+                    container.appendChild(el);
+                });
+                slide.insertBefore(container, slide.firstChild);
+            });
+        }
+
+        /* Init */
+        buildDecor();
+        buildDots();
+        observe();
+        bindKeys();
+
+        prevBtn.addEventListener('click', function () { goTo(current - 1); });
+        nextBtn.addEventListener('click', function () { goTo(current + 1); });
+        syncUI(0);
+
+        /* Reduce motion: disable smooth scroll */
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            wrapper.style.scrollBehavior = 'auto';
+        }
+
+        /* Expose goToSlide for sommaire onclick attributes */
+        window.goToSlide = goTo;
+    }());
+    </script>
+</body>
+</html>
