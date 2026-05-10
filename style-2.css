@@ -201,6 +201,57 @@ img { display: block; }
     padding: clamp(0.5rem, 1.5vh, 1.5rem) 0;
 }
 
+/* ==================== FULLSCREEN BUTTON ==================== */
+.btn-fullscreen {
+    position: fixed;
+    top: clamp(12px, 2vw, 20px);
+    right: clamp(12px, 2vw, 20px);
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 14px;
+    cursor: pointer;
+    z-index: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+/* Show on hover anywhere on the page */
+body:hover .btn-fullscreen,
+.btn-fullscreen:focus {
+    opacity: 1;
+}
+
+.btn-fullscreen:hover {
+    background: rgba(255, 255, 255, 0.28);
+    color: #fff;
+    transform: scale(1.08);
+}
+
+/* On light slides, use dark variant */
+.slide-light .btn-fullscreen,
+body.fs-light .btn-fullscreen {
+    background: rgba(0, 0, 0, 0.08);
+    color: rgba(0, 0, 0, 0.5);
+}
+.slide-light .btn-fullscreen:hover,
+body.fs-light .btn-fullscreen:hover {
+    background: rgba(0, 0, 0, 0.15);
+    color: rgba(0, 0, 0, 0.8);
+}
+
+/* Hide in fullscreen — user uses Esc or F to exit */
+:fullscreen .btn-fullscreen { opacity: 0; }
+:fullscreen body:hover .btn-fullscreen { opacity: 1; }
+
 /* ==================== NAV DOTS (left fixed) ==================== */
 .nav-dots {
     position: fixed;

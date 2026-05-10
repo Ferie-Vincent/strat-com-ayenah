@@ -18,6 +18,11 @@
     <!-- Left nav dots -->
     <nav class="nav-dots" id="navDots" aria-label="Navigation slides"></nav>
 
+    <!-- Fullscreen toggle -->
+    <button class="btn-fullscreen" id="btnFullscreen" aria-label="Plein écran" title="Plein écran (F)">
+        <i class="fas fa-expand" id="fsIcon"></i>
+    </button>
+
     <!-- Slides wrapper — scroll-snap container -->
     <div class="slides-wrapper" id="slidesWrapper">
 
@@ -971,6 +976,41 @@
 
         /* Expose goToSlide for sommaire onclick attributes */
         window.goToSlide = goTo;
+
+        /* ==================== FULLSCREEN ==================== */
+        (function () {
+            var btn  = document.getElementById('btnFullscreen');
+            var icon = document.getElementById('fsIcon');
+
+            function isFullscreen() {
+                return !!(document.fullscreenElement || document.webkitFullscreenElement);
+            }
+
+            function updateIcon() {
+                icon.className = isFullscreen() ? 'fas fa-compress' : 'fas fa-expand';
+                btn.title = isFullscreen() ? 'Quitter le plein écran (F ou Échap)' : 'Plein écran (F)';
+            }
+
+            btn.addEventListener('click', function () {
+                if (isFullscreen()) {
+                    (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+                } else {
+                    (document.documentElement.requestFullscreen || document.documentElement.webkitRequestFullscreen).call(document.documentElement);
+                }
+            });
+
+            document.addEventListener('fullscreenchange', updateIcon);
+            document.addEventListener('webkitfullscreenchange', updateIcon);
+
+            /* F key toggles fullscreen (skip when typing in inputs) */
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'f' || e.key === 'F') {
+                    if (document.activeElement && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+                        btn.click();
+                    }
+                }
+            });
+        }());
     }());
     </script>
 </body>
