@@ -206,51 +206,35 @@ img { display: block; }
     position: fixed;
     top: clamp(12px, 2vw, 20px);
     right: clamp(12px, 2vw, 20px);
-    width: 36px;
-    height: 36px;
-    border: none;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    color: rgba(255, 255, 255, 0.75);
-    font-size: 14px;
+    width: 44px;
+    height: 44px;
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg-slide);
+    color: var(--green);
+    font-size: 15px;
     cursor: pointer;
     z-index: 600;
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0;
-    transition: opacity 0.25s ease, background 0.2s ease, transform 0.2s ease;
-}
-
-/* Show on hover anywhere on the page */
-body:hover .btn-fullscreen,
-.btn-fullscreen:focus {
-    opacity: 1;
+    opacity: 0.85;
+    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .btn-fullscreen:hover {
-    background: rgba(255, 255, 255, 0.28);
-    color: #fff;
-    transform: scale(1.08);
+    background: var(--green-mid);
+    border-color: rgba(27, 140, 78, 0.35);
+    color: var(--green-dark);
+    transform: scale(1.06);
+    opacity: 1;
 }
 
-/* On light slides, use dark variant */
-.slide-light .btn-fullscreen,
-body.fs-light .btn-fullscreen {
-    background: rgba(0, 0, 0, 0.08);
-    color: rgba(0, 0, 0, 0.5);
+.btn-fullscreen:active {
+    transform: scale(0.96);
 }
-.slide-light .btn-fullscreen:hover,
-body.fs-light .btn-fullscreen:hover {
-    background: rgba(0, 0, 0, 0.15);
-    color: rgba(0, 0, 0, 0.8);
-}
-
-/* Hide in fullscreen — user uses Esc or F to exit */
-:fullscreen .btn-fullscreen { opacity: 0; }
-:fullscreen body:hover .btn-fullscreen { opacity: 1; }
 
 /* ==================== NAV DOTS (left fixed) ==================== */
 .nav-dots {
