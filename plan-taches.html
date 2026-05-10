@@ -245,33 +245,43 @@
             margin-bottom: 20px;
             padding: 20px 25px;
             border-radius: var(--border-radius);
-            color: var(--white);
+            background: var(--white);
+            box-shadow: 0 4px 20px rgba(27,140,78,0.08);
+            border-left: 5px solid var(--primary-green);
+            color: var(--dark);
         }
 
-        .phase-header.phase0 { background: linear-gradient(135deg, var(--phase0-color), #2980b9); }
-        .phase-header.phase1 { background: linear-gradient(135deg, var(--phase1-color), #c0392b); }
-        .phase-header.phase2 { background: linear-gradient(135deg, var(--phase2-color), #e67e22); }
-        .phase-header.phase3 { background: linear-gradient(135deg, var(--phase3-color), var(--primary-green-dark)); }
+        .phase-header.phase0 { border-left-color: var(--phase0-color); }
+        .phase-header.phase0 .phase-icon { background: rgba(52,152,219,0.12); color: var(--phase0-color); }
+        .phase-header.phase1 { border-left-color: var(--phase1-color); }
+        .phase-header.phase1 .phase-icon { background: rgba(231,76,60,0.12); color: var(--phase1-color); }
+        .phase-header.phase2 { border-left-color: var(--phase2-color); }
+        .phase-header.phase2 .phase-icon { background: rgba(243,156,18,0.12); color: var(--phase2-color); }
+        .phase-header.phase3 { border-left-color: var(--phase3-color); }
+        .phase-header.phase3 .phase-icon { background: rgba(27,140,78,0.12); color: var(--phase3-color); }
 
         .phase-icon {
             width: 50px;
             height: 50px;
-            background: rgba(255,255,255,0.2);
+            background: var(--light-green);
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
+            flex-shrink: 0;
+            color: var(--primary-green);
         }
 
         .phase-info h2 {
             font-size: 1.3rem;
             font-weight: 700;
+            color: var(--dark);
         }
 
         .phase-info span {
             font-size: 0.9rem;
-            opacity: 0.9;
+            color: var(--gray);
         }
 
         .phase-progress {
@@ -282,11 +292,12 @@
         .phase-progress .percentage {
             font-size: 2rem;
             font-weight: 700;
+            color: var(--primary-green);
         }
 
         .phase-progress .label {
             font-size: 0.8rem;
-            opacity: 0.9;
+            color: var(--gray);
         }
 
         /* Domain Groups */
@@ -300,7 +311,8 @@
 
         .domain-header {
             padding: 18px 25px;
-            background: var(--gray-light);
+            background: var(--white);
+            border-left: 4px solid var(--primary-green);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -309,7 +321,7 @@
         }
 
         .domain-header:hover {
-            background: var(--light-green);
+            background: var(--extra-light-green);
         }
 
         .domain-title {
@@ -502,27 +514,30 @@
         }
 
         .checklist-card-header {
-            padding: 20px;
-            background: linear-gradient(135deg, var(--primary-green), var(--primary-green-dark));
-            color: var(--white);
+            padding: 18px 20px;
+            background: var(--white);
+            border-bottom: 3px solid var(--primary-green);
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
         .checklist-card-header h3 {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             display: flex;
             align-items: center;
             gap: 10px;
+            color: var(--primary-green);
         }
 
         .checklist-card-header .count {
-            background: rgba(255,255,255,0.2);
-            padding: 5px 12px;
+            background: var(--light-green);
+            color: var(--primary-green);
+            padding: 4px 12px;
             border-radius: 20px;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
+            font-weight: 600;
         }
 
         .checklist-items {
@@ -675,23 +690,26 @@
         }
 
         .kpi-chart {
-            height: 40px;
+            height: 36px;
             display: flex;
             align-items: flex-end;
-            gap: 4px;
+            gap: 3px;
             margin-top: 15px;
+            padding-bottom: 2px;
+            border-bottom: 2px solid var(--light-green);
         }
 
         .kpi-bar {
             flex: 1;
-            background: var(--light-green);
-            border-radius: 4px 4px 0 0;
-            min-height: 5px;
+            background: rgba(27,140,78,0.12);
+            border-radius: 3px 3px 0 0;
+            min-height: 3px;
             transition: height 0.3s ease;
         }
 
         .kpi-bar:last-child {
             background: var(--primary-green);
+            opacity: 0.85;
         }
 
         /* ==================== CALENDRIER EDITORIAL ==================== */
@@ -979,6 +997,450 @@
             }
         }
 
+        /* Back button */
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 18px;
+            background: rgba(255,255,255,0.18);
+            border: 1px solid rgba(255,255,255,0.35);
+            border-radius: 50px;
+            color: var(--white);
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .btn-back:hover {
+            background: rgba(255,255,255,0.28);
+            transform: translateX(-3px);
+        }
+
+        .btn-back i {
+            font-size: 0.8rem;
+        }
+
+        /* =====================================================
+           ADMIN DASHBOARD REDESIGN — inspired by Simple theme
+           coderthemes.com/simple — green+white palette
+           ===================================================== */
+
+        :root {
+            --sidebar-w: 240px;
+            --topbar-h: 60px;
+            --bg: #f2f5f3;
+            --border: #e3ebe6;
+            --card-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.03);
+            --green-muted: #f0f7f2;
+            --text: #1c2b22;
+            --text-muted: #6b7f74;
+            --tr: all 0.2s ease;
+        }
+
+        body { background: var(--bg); }
+
+        /* --- SIDEBAR --- */
+        .nav-tabs {
+            position: fixed;
+            top: 0; left: 0;
+            width: var(--sidebar-w);
+            height: 100vh;
+            background: #fff;
+            border-right: 1px solid var(--border);
+            flex-direction: column;
+            align-items: stretch;
+            padding: 0 0 24px;
+            overflow-y: auto;
+            z-index: 200;
+            box-shadow: none;
+        }
+
+        .sidebar-brand {
+            padding: 18px 20px 16px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sidebar-brand img { height: 38px; width: auto; }
+
+        .sidebar-section {
+            padding: 18px 20px 6px;
+            font-size: 0.63rem;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .nav-tab {
+            margin: 2px 10px;
+            padding: 9px 14px;
+            border-radius: 8px;
+            font-size: 0.84rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            border-bottom: none;
+            gap: 12px;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            transition: var(--tr);
+        }
+
+        .nav-tab i { font-size: 0.9rem; width: 18px; text-align: center; }
+        .nav-tab span { display: block; }
+
+        .nav-tab:hover {
+            background: var(--extra-light-green);
+            color: var(--primary-green);
+        }
+
+        .nav-tab.active {
+            background: var(--light-green);
+            color: var(--primary-green);
+            font-weight: 600;
+            border-bottom: none;
+        }
+
+        .sidebar-back-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 4px 10px 0;
+            padding: 9px 14px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-radius: 8px;
+            border: 1px dashed var(--border);
+            transition: var(--tr);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .sidebar-back-link:hover {
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+            background: var(--extra-light-green);
+        }
+
+        .sidebar-back-link i { font-size: 0.78rem; }
+
+        /* --- TOPBAR --- */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: var(--sidebar-w);
+            right: 0;
+            height: var(--topbar-h);
+            background: #fff;
+            border-bottom: 1px solid var(--border);
+            padding: 0 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 100;
+            box-shadow: none;
+        }
+
+        .header-left { display: flex; flex-direction: column; gap: 1px; align-items: flex-start; }
+        .header-left img { display: none; }
+
+        .header-title h1 { font-size: 0.95rem; font-weight: 600; color: var(--text); }
+        .header-title span { font-size: 0.74rem; color: var(--text-muted); opacity: 1; font-weight: 400; }
+
+        .header-right { display: flex; align-items: center; gap: 10px; }
+
+        .btn-back {
+            background: var(--extra-light-green);
+            border: 1px solid var(--border);
+            color: var(--primary-green);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            transition: var(--tr);
+        }
+
+        .btn-back:hover {
+            background: var(--light-green);
+            border-color: var(--primary-green);
+            transform: none;
+        }
+
+        .progress-global {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 5px 14px;
+        }
+
+        .progress-global span { font-size: 0.76rem; color: var(--text-muted); }
+
+        .progress-circle { width: 34px; height: 34px; }
+        .progress-circle::before { width: 24px; height: 24px; background: var(--bg); }
+        .progress-circle span { font-size: 0.62rem; font-weight: 700; color: var(--primary-green); }
+
+        /* --- MAIN CONTENT --- */
+        .main-content {
+            margin-left: var(--sidebar-w);
+            margin-top: var(--topbar-h);
+            padding: 24px 28px;
+            max-width: none;
+        }
+
+        /* --- PHASE FILTER BUTTONS --- */
+        .phase-filter { gap: 7px; margin-bottom: 20px; }
+
+        .phase-btn {
+            padding: 6px 14px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: #fff;
+            color: var(--text-muted);
+            font-size: 0.79rem;
+            font-weight: 500;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: none;
+            transition: var(--tr);
+        }
+
+        .phase-btn:hover,
+        .phase-btn.active { box-shadow: none; transform: none; }
+
+        .phase-btn.all.active { background: var(--text); color: #fff; border-color: var(--text); }
+        .phase-btn.phase0:hover, .phase-btn.phase0.active { background: rgba(59,130,246,0.08); border-color: #3b82f6; color: #3b82f6; }
+        .phase-btn.phase1:hover, .phase-btn.phase1.active { background: rgba(239,68,68,0.08); border-color: #ef4444; color: #ef4444; }
+        .phase-btn.phase2:hover, .phase-btn.phase2.active { background: rgba(245,158,11,0.08); border-color: #f59e0b; color: #b45309; }
+        .phase-btn.phase3:hover, .phase-btn.phase3.active { background: var(--light-green); border-color: var(--primary-green); color: var(--primary-green); }
+
+        .phase-count { background: rgba(0,0,0,0.06); color: inherit; font-size: 0.7rem; padding: 1px 7px; }
+
+        /* --- PHASE HEADERS --- */
+        .phase-section { margin-bottom: 28px; }
+
+        .phase-header {
+            padding: 13px 18px;
+            margin-bottom: 10px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            color: var(--text);
+        }
+
+        .phase-icon { width: 38px; height: 38px; border-radius: 9px; font-size: 1.1rem; }
+
+        .phase-info h2 { font-size: 0.88rem; font-weight: 700; color: var(--text); }
+        .phase-info span { font-size: 0.76rem; color: var(--text-muted); opacity: 1; }
+        .phase-progress .percentage { font-size: 1.5rem; font-weight: 700; }
+        .phase-progress .label { font-size: 0.72rem; color: var(--text-muted); opacity: 1; }
+
+        /* --- DOMAIN GROUPS --- */
+        .domain-group {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin-bottom: 7px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .domain-header {
+            padding: 12px 18px;
+            background: #fff;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .domain-header:hover { background: var(--extra-light-green); }
+        .domain-header.expanded { border-bottom: 1px solid var(--bg); }
+
+        .domain-title { font-size: 0.83rem; font-weight: 600; color: var(--text); }
+        .domain-title i {
+            width: 30px; height: 30px; border-radius: 7px; font-size: 0.8rem;
+            background: var(--light-green) !important;
+            color: var(--primary-green) !important;
+        }
+        .domain-progress-bar { width: 80px; height: 4px; background: var(--bg); }
+
+        /* --- TASKS --- */
+        .task-item { padding: 10px 18px; font-size: 0.83rem; border-bottom: 1px solid var(--bg); }
+        .task-item:hover { background: var(--extra-light-green); }
+        .task-checkbox { width: 18px; height: 18px; border-radius: 4px; border: 1.5px solid #d1d5db; }
+        .task-content h4 { font-size: 0.83rem; }
+        .task-content p { font-size: 0.75rem; }
+        .responsible-avatar { background: var(--light-green); color: var(--primary-green); width: 26px; height: 26px; font-size: 0.68rem; }
+        .task-status { border-radius: 6px; font-size: 0.72rem; padding: 3px 10px; }
+        .task-status.pending { background: #fff7ed; color: #c2410c; }
+        .task-status.in-progress { background: #eff6ff; color: #1d4ed8; }
+        .task-status.completed { background: var(--light-green); color: var(--primary-green); }
+
+        /* --- CHECKLIST --- */
+        .checklist-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+        .checklist-card { border: 1px solid var(--border); box-shadow: var(--card-shadow); border-radius: 10px; }
+        .checklist-card-header { padding: 13px 16px; background: #fff; border-bottom: 2px solid var(--primary-green); }
+        .checklist-card-header h3 { font-size: 0.83rem; color: var(--primary-green); }
+        .checklist-card-header .count { background: var(--light-green); color: var(--primary-green); font-size: 0.74rem; padding: 3px 9px; }
+        .checklist-items { padding: 8px 14px; }
+        .checklist-item { padding: 9px 0; border-bottom: 1px solid var(--bg); }
+        .check-text { font-size: 0.82rem; }
+        .check-box { width: 17px; height: 17px; border-radius: 4px; border: 1.5px solid #d1d5db; }
+
+        /* --- KPIs --- */
+        .kpi-section-title {
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            border-left: none;
+            padding-left: 0;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .kpi-section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+        .kpi-grid { gap: 12px; }
+        .kpi-card { border: 1px solid var(--border); box-shadow: var(--card-shadow); border-radius: 10px; padding: 18px; }
+        .kpi-frequency { font-size: 0.68rem; background: var(--light-green); color: var(--primary-green); padding: 2px 8px; }
+        .kpi-value { font-size: 1.8rem; margin-bottom: 6px; }
+        .kpi-value input { font-size: 1.6rem; border-bottom: 1.5px dashed var(--border); }
+        .kpi-chart { height: 28px; border-bottom: 1.5px solid var(--border); margin-top: 10px; padding-bottom: 2px; }
+        .kpi-bar { background: rgba(27,140,78,0.1); }
+        .kpi-bar:last-child { background: var(--primary-green); opacity: 0.65; }
+
+        /* --- STATS ROW (dashboard overview) --- */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin-bottom: 22px;
+        }
+
+        .stat-widget {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 16px 20px;
+            box-shadow: var(--card-shadow);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .stat-widget-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .stat-widget-icon.green { background: var(--light-green); color: var(--primary-green); }
+        .stat-widget-icon.blue { background: #eff6ff; color: #3b82f6; }
+        .stat-widget-icon.orange { background: #fff7ed; color: #f59e0b; }
+        .stat-widget-icon.gray { background: var(--bg); color: var(--text-muted); }
+
+        .stat-widget-val {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1;
+            margin-bottom: 3px;
+        }
+
+        .stat-widget-lbl {
+            font-size: 0.74rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        @media (max-width: 768px) {
+            .stats-row { grid-template-columns: 1fr 1fr; }
+        }
+
+        /* --- CALENDAR --- */
+        .calendar-container { border: 1px solid var(--border); box-shadow: var(--card-shadow); }
+        .calendar-header { background: #fff; color: var(--text); border-bottom: 1px solid var(--border); padding: 18px 24px; }
+        .calendar-header h2 { font-size: 1rem; font-weight: 700; margin-bottom: 2px; color: var(--text); }
+        .calendar-header p { font-size: 0.8rem; color: var(--text-muted); opacity: 1; }
+        .calendar-day { border-right: 1px solid var(--bg); border-bottom: 1px solid var(--bg); }
+        .day-content-type { background: var(--extra-light-green); border: 1px solid var(--border); }
+
+        /* --- HAMBURGER --- */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            flex-shrink: 0;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--text);
+            border-radius: 2px;
+            transition: var(--tr);
+        }
+
+        .topbar-logo { display: none; height: 30px; width: auto; }
+
+        /* --- OVERLAY --- */
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.35);
+            z-index: 150;
+            backdrop-filter: blur(2px);
+        }
+
+        .sidebar-overlay.active { display: block; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 992px) {
+            .nav-tabs {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+
+            .nav-tabs.sidebar-open { transform: translateX(0); }
+
+            .main-header { left: 0; }
+            .main-content { margin-left: 0; }
+
+            .hamburger { display: flex; }
+            .topbar-logo { display: block; }
+            .header-left img.topbar-logo { display: block; }
+
+            /* Hide logo in sidebar header-left (not relevant on mobile) */
+            .header-left > img:not(.topbar-logo) { display: none; }
+        }
+
+        @media (max-width: 768px) {
+            .main-content { padding: 16px; }
+            .checklist-grid { grid-template-columns: 1fr; }
+            .stats-row { grid-template-columns: 1fr 1fr; }
+        }
+
         /* Print styles */
         @media print {
             .main-header,
@@ -1009,13 +1471,20 @@
     <!-- Header -->
     <header class="main-header">
         <div class="header-left">
-            <img src="images/logos/logo-ayenah.png" alt="AYENAH">
+            <button class="hamburger" id="hamburgerBtn" aria-label="Menu" onclick="toggleSidebar()">
+                <span></span><span></span><span></span>
+            </button>
+            <img src="images/logos/logo-ayenah.png" alt="AYENAH" class="topbar-logo">
             <div class="header-title">
                 <h1>Plan de Tâches AYENAH</h1>
                 <span>Suivi opérationnel de la stratégie de communication</span>
             </div>
         </div>
         <div class="header-right">
+            <a href="index-2.html" class="btn-back">
+                <i class="fas fa-arrow-left"></i>
+                Présentation
+            </a>
             <div class="progress-global">
                 <span>Progression globale</span>
                 <div class="progress-circle" id="globalProgress">
@@ -1025,10 +1494,17 @@
         </div>
     </header>
 
-    <!-- Navigation Tabs -->
-    <nav class="nav-tabs">
+    <!-- Sidebar Navigation -->
+    <nav class="nav-tabs" role="navigation" aria-label="Navigation principale">
+        <!-- Brand -->
+        <div class="sidebar-brand">
+            <img src="images/logos/logo-ayenah.png" alt="AYENAH">
+        </div>
+
+        <!-- Nav items -->
+        <div class="sidebar-section">Navigation</div>
         <div class="nav-tab active" data-tab="overview">
-            <i class="fas fa-tasks"></i>
+            <i class="fas fa-table-columns"></i>
             <span>Vue d'ensemble</span>
         </div>
         <div class="nav-tab" data-tab="checklist">
@@ -1041,14 +1517,53 @@
         </div>
         <div class="nav-tab" data-tab="calendar">
             <i class="fas fa-calendar-alt"></i>
-            <span>Calendrier</span>
+            <span>Calendrier Éditorial</span>
         </div>
+
+        <!-- Back link -->
+        <div class="sidebar-section">Accès rapide</div>
+        <a href="index-2.html" class="sidebar-back-link">
+            <i class="fas fa-arrow-left"></i>
+            Retour à la présentation
+        </a>
     </nav>
 
     <!-- Main Content -->
     <main class="main-content">
         <!-- VUE D'ENSEMBLE -->
         <div class="tab-content active" id="overview">
+            <!-- Stats Overview -->
+            <div class="stats-row">
+                <div class="stat-widget">
+                    <div class="stat-widget-icon green"><i class="fas fa-list-check"></i></div>
+                    <div>
+                        <div class="stat-widget-val">141</div>
+                        <div class="stat-widget-lbl">Tâches totales</div>
+                    </div>
+                </div>
+                <div class="stat-widget">
+                    <div class="stat-widget-icon blue"><i class="fas fa-layer-group"></i></div>
+                    <div>
+                        <div class="stat-widget-val">4</div>
+                        <div class="stat-widget-lbl">Phases planifiées</div>
+                    </div>
+                </div>
+                <div class="stat-widget">
+                    <div class="stat-widget-icon orange"><i class="fas fa-clock"></i></div>
+                    <div>
+                        <div class="stat-widget-val" id="statPending">141</div>
+                        <div class="stat-widget-lbl">En attente</div>
+                    </div>
+                </div>
+                <div class="stat-widget">
+                    <div class="stat-widget-icon gray"><i class="fas fa-check-circle"></i></div>
+                    <div>
+                        <div class="stat-widget-val" id="statDone">0</div>
+                        <div class="stat-widget-lbl">Complétées</div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Phase Filter -->
             <div class="phase-filter">
                 <button class="phase-btn all active" data-phase="all">
@@ -2205,7 +2720,26 @@
         </div>
     </main>
 
+    <!-- Mobile sidebar overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
     <script>
+        // Sidebar mobile toggle
+        function toggleSidebar() {
+            document.querySelector('.nav-tabs').classList.toggle('sidebar-open');
+            document.getElementById('sidebarOverlay').classList.toggle('active');
+        }
+
+        // Close sidebar when nav item clicked on mobile
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                if (window.innerWidth <= 992) {
+                    document.querySelector('.nav-tabs').classList.remove('sidebar-open');
+                    document.getElementById('sidebarOverlay').classList.remove('active');
+                }
+            });
+        });
+
         // Tab Navigation
         document.querySelectorAll('.nav-tab').forEach(tab => {
             tab.addEventListener('click', function() {
@@ -2243,18 +2777,70 @@
             tasksList.classList.toggle('expanded');
         }
 
+        // === PERSISTENCE — localStorage ===
+        const STORAGE_KEY = 'psc-ayenah-progress';
+
+        function setCheckIcon(el) {
+            el.textContent = '';
+            const icon = document.createElement('i');
+            icon.className = 'fas fa-check';
+            el.appendChild(icon);
+        }
+
+        function clearCheckIcon(el) {
+            el.textContent = '';
+        }
+
+        function assignIds() {
+            document.querySelectorAll('.task-checkbox').forEach((el, i) => {
+                el.dataset.cbid = 'task-' + i;
+            });
+            document.querySelectorAll('.check-box').forEach((el, i) => {
+                el.dataset.cbid = 'check-' + i;
+            });
+        }
+
+        function saveState() {
+            const checked = [];
+            document.querySelectorAll('[data-cbid].checked').forEach(el => {
+                checked.push(el.dataset.cbid);
+            });
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(checked));
+        }
+
+        function loadState() {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) return;
+            JSON.parse(raw).forEach(id => {
+                const el = document.querySelector('[data-cbid="' + id + '"]');
+                if (!el) return;
+                el.classList.add('checked');
+                setCheckIcon(el);
+                if (el.classList.contains('task-checkbox')) {
+                    const status = el.closest('.task-item') && el.closest('.task-item').querySelector('.task-status');
+                    if (status) { status.className = 'task-status completed'; status.textContent = 'Terminé'; }
+                } else {
+                    const item = el.closest('.checklist-item');
+                    if (item) item.classList.add('completed');
+                }
+            });
+            document.querySelectorAll('.checklist-card').forEach(card => updateChecklistCount(card));
+        }
+
         // Toggle Task
         function toggleTask(checkbox) {
             checkbox.classList.toggle('checked');
+            const status = checkbox.closest('.task-item').querySelector('.task-status');
             if (checkbox.classList.contains('checked')) {
-                checkbox.innerHTML = '<i class="fas fa-check"></i>';
-                checkbox.closest('.task-item').querySelector('.task-status').className = 'task-status completed';
-                checkbox.closest('.task-item').querySelector('.task-status').textContent = 'Terminé';
+                setCheckIcon(checkbox);
+                status.className = 'task-status completed';
+                status.textContent = 'Terminé';
             } else {
-                checkbox.innerHTML = '';
-                checkbox.closest('.task-item').querySelector('.task-status').className = 'task-status pending';
-                checkbox.closest('.task-item').querySelector('.task-status').textContent = 'En attente';
+                clearCheckIcon(checkbox);
+                status.className = 'task-status pending';
+                status.textContent = 'En attente';
             }
+            saveState();
             updateProgress();
         }
 
@@ -2262,14 +2848,14 @@
         function toggleCheck(checkbox) {
             checkbox.classList.toggle('checked');
             const item = checkbox.closest('.checklist-item');
-
             if (checkbox.classList.contains('checked')) {
-                checkbox.innerHTML = '<i class="fas fa-check"></i>';
+                setCheckIcon(checkbox);
                 item.classList.add('completed');
             } else {
-                checkbox.innerHTML = '';
+                clearCheckIcon(checkbox);
                 item.classList.remove('completed');
             }
+            saveState();
             updateChecklistCount(checkbox.closest('.checklist-card'));
         }
 
@@ -2280,28 +2866,40 @@
             card.querySelector('.count').textContent = `${completed}/${total}`;
         }
 
-        // Update progress
+        // Update progress — total fixé à 141, completion comptée sur tous les checkboxes
         function updateProgress() {
-            const allCheckboxes = document.querySelectorAll('.task-checkbox');
-            const completedCheckboxes = document.querySelectorAll('.task-checkbox.checked');
-            const percentage = Math.round((completedCheckboxes.length / allCheckboxes.length) * 100) || 0;
+            const doneTasks  = document.querySelectorAll('.task-checkbox.checked');
+            const doneChecks = document.querySelectorAll('.check-box.checked');
 
+            const total     = 141;
+            const completed = doneTasks.length + doneChecks.length;
+            const percentage = Math.round((completed / total) * 100);
+
+            // Progress circle (green on white topbar)
             const progressCircle = document.getElementById('globalProgress');
-            progressCircle.style.background = `conic-gradient(var(--accent-orange) ${percentage}%, rgba(255,255,255,0.2) ${percentage}%)`;
+            progressCircle.style.background =
+                `conic-gradient(#1B8C4E ${percentage}%, #e3ebe6 ${percentage}%)`;
             progressCircle.querySelector('span').textContent = `${percentage}%`;
 
-            // Update domain progress
-            document.querySelectorAll('.domain-group').forEach(domain => {
-                const total = domain.querySelectorAll('.task-checkbox').length;
-                const completed = domain.querySelectorAll('.task-checkbox.checked').length;
-                const pct = Math.round((completed / total) * 100) || 0;
+            // Stat widgets
+            const statDone    = document.getElementById('statDone');
+            const statPending = document.getElementById('statPending');
+            if (statDone)    statDone.textContent    = completed;
+            if (statPending) statPending.textContent = total - completed;
 
+            // Domain progress bars
+            document.querySelectorAll('.domain-group').forEach(domain => {
+                const t = domain.querySelectorAll('.task-checkbox').length;
+                const c = domain.querySelectorAll('.task-checkbox.checked').length;
+                const pct = t ? Math.round((c / t) * 100) : 0;
                 domain.querySelector('.domain-progress-fill').style.width = `${pct}%`;
-                domain.querySelector('.domain-count').textContent = `${completed}/${total}`;
+                domain.querySelector('.domain-count').textContent = `${c}/${t}`;
             });
         }
 
         // Initialize
+        assignIds();
+        loadState();
         updateProgress();
     </script>
 </body>

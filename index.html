@@ -74,8 +74,17 @@
             overflow: hidden;
         }
 
-        /* Scrollable slide content */
+        /* Slide Content */
         .slide-content {
+            flex: 1;
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 110px 80px 170px;
+            position: relative;
+            z-index: 10;
             overflow-y: auto;
             overflow-x: hidden;
             -webkit-overflow-scrolling: touch;
@@ -265,18 +274,18 @@
             transform: scale(1.08);
         }
 
-        /* Footer */
+        /* Footer — raised 64px to sit above the fixed nav bar */
         .slide-footer {
             position: absolute;
-            bottom: 0;
+            bottom: 64px;
             left: 0;
             right: 0;
-            padding: 25px 60px;
+            padding: 16px 60px;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 50px;
-            background: linear-gradient(to top, rgba(255,255,255,0.98), transparent);
+            background: linear-gradient(to top, rgba(255,255,255,0.98) 60%, rgba(255,255,255,0.92) 85%, transparent 100%);
             z-index: 100;
         }
 
@@ -291,18 +300,6 @@
             opacity: 1;
             transform: scale(1.12) translateY(-3px);
             filter: grayscale(0%) drop-shadow(0 5px 15px rgba(0,0,0,0.1));
-        }
-
-        /* Slide Content */
-        .slide-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 110px 80px 180px;
-            position: relative;
-            z-index: 10;
         }
 
         /* ==================== COVER SLIDE - SPECTACULAR ==================== */
@@ -475,12 +472,13 @@
             z-index: 10;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
-            text-align: center;
+            text-align: left;
             width: 100%;
             max-width: 1200px;
             color: var(--white);
+            padding-right: 450px;
         }
 
         /* Top Badge */
@@ -784,13 +782,6 @@
         @keyframes floatImgReveal {
             from { opacity: 0; transform: translateY(20px) scale(0.8); }
             to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        /* Adjust cover main for image */
-        .cover-main {
-            padding-right: 450px;
-            text-align: left;
-            align-items: flex-start;
         }
 
         /* Cover Header Override */
@@ -1683,32 +1674,34 @@
         }
 
         /* ==================== NAVIGATION ==================== */
+        /* All fixed nav elements share bottom: 12px — nothing floats over slide content */
         .nav-controls {
             position: fixed;
-            bottom: 100px;
+            bottom: 12px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 12px;
+            gap: 10px;
             z-index: 1000;
-            background: rgba(255,255,255,0.7);
-            padding: 10px 15px;
+            background: rgba(255,255,255,0.88);
+            padding: 8px 14px;
             border-radius: 50px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.5);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.6);
+            align-items: center;
         }
 
         .nav-btn {
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
             border: none;
             border-radius: 50%;
             background: rgba(255,255,255,0.8);
             color: var(--primary-green);
-            font-size: 1.1rem;
+            font-size: 1rem;
             cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
             transition: var(--transition);
             display: flex;
             align-items: center;
@@ -1718,7 +1711,7 @@
         .nav-btn:hover:not(:disabled) {
             background: var(--primary-green);
             color: var(--white);
-            transform: scale(1.1);
+            transform: scale(1.08);
         }
 
         .nav-btn:disabled {
@@ -1728,18 +1721,21 @@
 
         .slide-counter {
             position: fixed;
-            bottom: 108px;
-            right: 50px;
-            background: rgba(255,255,255,0.7);
-            padding: 12px 22px;
+            bottom: 12px;
+            right: 20px;
+            background: rgba(255,255,255,0.88);
+            padding: 10px 18px;
             border-radius: 30px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.5);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.6);
             font-weight: 600;
             color: var(--primary-green);
             z-index: 1000;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            height: 44px;
         }
 
         .progress-bar {
@@ -1752,25 +1748,26 @@
             transition: width 0.5s ease;
         }
 
+        /* Indicators on the LEFT — no conflict with scrollbar or counter */
         .slide-indicators {
             position: fixed;
-            right: 25px;
+            left: 20px;
             top: 50%;
             transform: translateY(-50%);
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
             z-index: 1000;
             background: rgba(255,255,255,0.5);
-            padding: 10px 8px;
+            padding: 10px 7px;
             border-radius: 20px;
             backdrop-filter: blur(8px);
             border: 1px solid rgba(255,255,255,0.4);
         }
 
         .indicator {
-            width: 10px;
-            height: 10px;
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             background: rgba(27, 140, 78, 0.3);
             cursor: pointer;
@@ -1785,32 +1782,32 @@
         .indicator.active {
             background: var(--primary-green);
             transform: scale(1.4);
-            box-shadow: 0 0 10px rgba(27, 140, 78, 0.5);
+            box-shadow: 0 0 8px rgba(27, 140, 78, 0.5);
         }
 
         /* ==================== EXTRA NAV BUTTONS ==================== */
         .nav-extra-buttons {
             position: fixed;
-            bottom: 108px;
-            left: 50px;
+            bottom: 12px;
+            left: 20px;
             display: flex;
-            gap: 10px;
+            gap: 8px;
             z-index: 1001;
         }
 
         .nav-extra-btn {
-            width: 42px;
-            height: 42px;
+            width: 40px;
+            height: 40px;
             border: none;
             border-radius: 12px;
-            background: rgba(255,255,255,0.6);
+            background: rgba(255,255,255,0.88);
             color: var(--primary-green);
-            font-size: 1rem;
+            font-size: 0.95rem;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             transition: var(--transition);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.5);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.6);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1819,7 +1816,7 @@
         .nav-extra-btn:hover {
             background: rgba(27, 140, 78, 0.9);
             color: var(--white);
-            transform: scale(1.1);
+            transform: scale(1.08);
         }
 
         /* ==================== SOMMAIRE MODAL ==================== */
@@ -2239,7 +2236,7 @@
             .slide-footer img { height: 32px; }
 
             .nav-extra-buttons { gap: 8px; }
-            .nav-extra-btn { width: 40px; height: 40px; font-size: 0.9rem; }
+            .nav-extra-btn { width: 38px; height: 38px; font-size: 0.88rem; }
 
             .sommaire-content { width: 90%; max-width: 500px; }
 
@@ -2251,8 +2248,8 @@
             .conclusion-box { padding: 40px 50px; }
             .conclusion-quote { font-size: 1.5rem; }
 
-            .nav-controls { bottom: 90px; }
-            .slide-counter { bottom: 98px; right: 40px; }
+            .nav-btn { width: 42px; height: 42px; }
+            .slide-counter { font-size: 0.85rem; }
         }
 
         /* Tablette portrait / Mobile large (768px) */
@@ -2283,19 +2280,11 @@
             }
             .slide-footer img { height: 28px; }
 
-            .nav-extra-buttons {
-                top: auto;
-                bottom: 100px;
-                right: 10px;
-                gap: 6px;
-            }
-            .nav-extra-btn { width: 36px; height: 36px; font-size: 0.85rem; }
+            .nav-extra-buttons { gap: 6px; left: 12px; }
+            .nav-extra-btn { width: 34px; height: 34px; font-size: 0.82rem; }
 
-            .slide-indicators {
-                bottom: 60px;
-                gap: 6px;
-            }
-            .indicator { width: 8px; height: 8px; }
+            .slide-indicators { gap: 6px; left: 12px; }
+            .indicator { width: 7px; height: 7px; }
 
             .cards-grid-2x2 { grid-template-columns: 1fr; gap: 15px; }
             .cards-grid-3x2 { grid-template-columns: 1fr; gap: 15px; }
@@ -2325,17 +2314,9 @@
             .conclusion-quote { font-size: 1.3rem; }
             .conclusion-text { font-size: 1rem; }
 
-            .nav-controls {
-                bottom: 70px;
-                padding: 8px 12px;
-            }
-            .nav-btn { width: 42px; height: 42px; font-size: 1rem; }
-            .slide-counter {
-                bottom: 78px;
-                right: 20px;
-                padding: 10px 18px;
-                font-size: 0.85rem;
-            }
+            .nav-controls { padding: 7px 11px; }
+            .nav-btn { width: 40px; height: 40px; font-size: 0.95rem; }
+            .slide-counter { padding: 8px 14px; font-size: 0.82rem; right: 12px; }
 
             .timeline-content { padding: 20px; }
             .timeline-title { font-size: 1rem; }
@@ -2416,17 +2397,10 @@
             }
             .slide-footer img { height: 24px; }
 
-            .nav-extra-buttons {
-                right: 8px;
-                bottom: 90px;
-                gap: 5px;
-            }
+            .nav-extra-buttons { gap: 5px; left: 10px; }
             .nav-extra-btn { width: 32px; height: 32px; font-size: 0.8rem; }
 
-            .slide-indicators {
-                bottom: 50px;
-                gap: 5px;
-            }
+            .slide-indicators { gap: 5px; left: 10px; }
             .indicator { width: 6px; height: 6px; }
 
             .pillar { padding: 20px; }
@@ -2576,16 +2550,10 @@
             }
             .slide-footer img { height: 20px; }
 
-            .nav-extra-buttons {
-                flex-direction: column;
-                right: 5px;
-                bottom: 80px;
-            }
+            .nav-extra-buttons { gap: 4px; left: 8px; }
             .nav-extra-btn { width: 30px; height: 30px; font-size: 0.75rem; }
 
-            .slide-indicators {
-                bottom: 45px;
-            }
+            .slide-indicators { left: 8px; gap: 4px; }
             .indicator { width: 5px; height: 5px; }
 
             .download-btn {
@@ -2615,18 +2583,10 @@
             .conclusion-quote { font-size: 1rem; margin-bottom: 15px; }
             .conclusion-text { font-size: 0.85rem; }
 
-            .nav-controls {
-                bottom: 45px;
-                gap: 6px;
-                padding: 5px 8px;
-            }
+            .slide-footer { bottom: 80px; }
+            .nav-controls { bottom: 45px; gap: 6px; padding: 5px 8px; }
             .nav-btn { width: 34px; height: 34px; font-size: 0.85rem; }
-            .slide-counter {
-                bottom: 53px;
-                right: 10px;
-                padding: 6px 12px;
-                font-size: 0.75rem;
-            }
+            .slide-counter { bottom: 53px; padding: 6px 12px; font-size: 0.75rem; right: 8px; }
 
             .timeline-content { padding: 15px; }
             .timeline-phase { font-size: 0.65rem; padding: 3px 10px; }
@@ -2708,8 +2668,8 @@
             .conclusion-quote { font-size: 0.9rem; }
             .conclusion-text { font-size: 0.8rem; }
 
-            .nav-controls { bottom: 40px; }
             .nav-btn { width: 30px; height: 30px; font-size: 0.75rem; }
+            .nav-controls { bottom: 40px; }
             .slide-counter { bottom: 48px; padding: 5px 10px; font-size: 0.7rem; }
 
             .card { padding: 15px; }
@@ -2760,11 +2720,9 @@
             .cover-stats-row { margin-top: 15px; }
             .download-section { margin-top: 20px; }
 
-            .nav-extra-buttons {
-                bottom: auto;
-                top: 50%;
-                transform: translateY(-50%);
-            }
+            .nav-extra-buttons { bottom: 12px; left: 10px; }
+            .nav-controls { bottom: 12px; }
+            .slide-counter { bottom: 12px; }
 
             .section-title { font-size: 1.6rem; }
             .section-subtitle { font-size: 0.85rem; }
@@ -2785,9 +2743,7 @@
             .budget-container { gap: 30px; }
             .budget-chart { width: 180px; height: 180px; }
 
-            .nav-controls { bottom: 50px; }
-            .slide-counter { bottom: 58px; }
-            .slide-indicators { gap: 6px; }
+            .slide-indicators { gap: 6px; left: 10px; }
             .indicator { width: 7px; height: 7px; }
         }
 
@@ -2821,6 +2777,16 @@
             .conclusion-box { padding: 60px 80px; }
             .conclusion-quote { font-size: 2rem; }
             .conclusion-text { font-size: 1.2rem; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .slides-container {
+                transition: none !important;
+            }
+            *, *::before, *::after {
+                animation: none !important;
+                transition: none !important;
+            }
         }
     </style>
 </head>
@@ -4109,6 +4075,7 @@
         const slidesContainer = document.getElementById('slidesContainer');
         const progressBar = document.getElementById('progressBar');
         const slideIndicators = document.getElementById('slideIndicators');
+        const slides = document.querySelectorAll('.slide');
 
         // Create indicators
         for (let i = 0; i < totalSlides; i++) {
@@ -4338,24 +4305,23 @@
                     const isAtTop = slideContent.scrollTop <= 0;
                     const isAtBottom = slideContent.scrollTop + slideContent.clientHeight >= slideContent.scrollHeight - 5;
 
-                    // Si on peut encore scroller dans le contenu, laisser le scroll naturel
                     if (e.deltaY > 0 && !isAtBottom) {
-                        // Scroll vers le bas, pas encore en bas
                         scrollAccumulator = 0;
                         return;
                     }
                     if (e.deltaY < 0 && !isAtTop) {
-                        // Scroll vers le haut, pas encore en haut
                         scrollAccumulator = 0;
                         return;
                     }
 
-                    // On est au bout, accumuler le scroll pour changer de slide
                     scrollAccumulator += Math.abs(e.deltaY);
 
                     if (scrollAccumulator < scrollThreshold) {
                         return;
                     }
+                } else {
+                    scrollAccumulator += Math.abs(e.deltaY);
+                    if (scrollAccumulator < scrollThreshold) return;
                 }
             }
 
@@ -4368,6 +4334,11 @@
             if (e.deltaY > 0) nextSlide();
             else prevSlide();
         }, { passive: true });
+
+        // Disable slide transition for users who prefer reduced motion
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            slidesContainer.style.transition = 'none';
+        }
 
         // Initialize
         document.getElementById('totalSlides').textContent = totalSlides;
