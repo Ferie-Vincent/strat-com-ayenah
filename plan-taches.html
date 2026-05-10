@@ -1025,6 +1025,37 @@
             font-size: 0.8rem;
         }
 
+        /* Auth widget */
+        .auth-widget { display: flex; align-items: center; margin-left: 8px; }
+        .btn-signin {
+            display: flex; align-items: center; gap: 6px;
+            padding: 6px 14px; background: var(--primary-green); color: #fff;
+            border: none; border-radius: 6px; font-size: 0.8rem; font-weight: 600;
+            cursor: pointer; transition: var(--tr);
+        }
+        .btn-signin:hover { background: var(--dark-green); }
+        .btn-signin.pulse { animation: authPulse 0.4s ease; }
+        @keyframes authPulse {
+            0%,100% { transform: scale(1); }
+            50% { transform: scale(1.08); box-shadow: 0 0 0 4px rgba(27,140,78,0.25); }
+        }
+        .auth-user-info { display: flex; align-items: center; gap: 8px; }
+        .auth-avatar { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--primary-green); object-fit: cover; }
+        .auth-name { font-size: 0.8rem; font-weight: 500; color: var(--text); max-width: 130px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .btn-signout {
+            background: none; border: 1px solid var(--border); border-radius: 6px;
+            padding: 4px 8px; cursor: pointer; color: var(--text-muted);
+            font-size: 0.75rem; transition: var(--tr);
+        }
+        .btn-signout:hover { border-color: #e74c3c; color: #e74c3c; }
+        .auth-toast {
+            position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+            background: #1c2b22; color: #fff; padding: 10px 20px; border-radius: 8px;
+            font-size: 0.85rem; z-index: 9999; opacity: 0; pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .auth-toast.show { opacity: 1; }
+
         /* =====================================================
            ADMIN DASHBOARD REDESIGN — inspired by Simple theme
            coderthemes.com/simple — green+white palette
@@ -1491,8 +1522,21 @@
                     <span>0%</span>
                 </div>
             </div>
+            <div class="auth-widget" id="authWidget">
+                <button class="btn-signin" id="btnSignIn" onclick="signIn()">
+                    <i class="fas fa-user-lock"></i> Connexion
+                </button>
+                <div class="auth-user-info" id="authUserInfo" style="display:none">
+                    <img id="authAvatar" src="" alt="" class="auth-avatar">
+                    <span id="authName" class="auth-name"></span>
+                    <button class="btn-signout" onclick="signOut()" title="Se déconnecter">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </div>
         </div>
     </header>
+    <div class="auth-toast" id="authToast">Connectez-vous pour modifier les tâches</div>
 
     <!-- Sidebar Navigation -->
     <nav class="nav-tabs" role="navigation" aria-label="Navigation principale">
@@ -2723,6 +2767,8 @@
     <!-- Mobile sidebar overlay -->
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     <script>
         // Sidebar mobile toggle
         function toggleSidebar() {
@@ -2779,13 +2825,56 @@
 
         // === PERSISTENCE — localStorage ===
         // ================================================================
-        // FIREBASE CONFIG — remplace l'URL par ton projet Firebase
-        // Format : https://TON-PROJET-default-rtdb.firebaseio.com
+        // FIREBASE AUTH + REALTIME DATABASE
         // ================================================================
-        const FIREBASE_URL = 'https://ayenah-psc-default-rtdb.europe-west1.firebasedatabase.app/psc-progress.json';
+        const firebaseConfig = {
+            apiKey: "AIzaSyDwXOnDb2Kbz33yOVya05GLrBAjRzCN5Es",
+            authDomain: "ayenah-psc.firebaseapp.com",
+            databaseURL: "https://ayenah-psc-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "ayenah-psc",
+            storageBucket: "ayenah-psc.firebasestorage.app",
+            messagingSenderId: "399751815051",
+            appId: "1:399751815051:web:240c3fa1365f7aab6bd98e"
+        };
 
-        // Debounce : évite de spammer Firebase sur clics rapides
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const DB_URL = 'https://ayenah-psc-default-rtdb.europe-west1.firebasedatabase.app/psc-progress.json';
+
+        let currentUser = null;
         let saveTimer = null;
+
+        // Observer état connexion
+        auth.onAuthStateChanged(user => {
+            currentUser = user;
+            if (user) {
+                document.getElementById('btnSignIn').style.display = 'none';
+                document.getElementById('authUserInfo').style.display = 'flex';
+                document.getElementById('authAvatar').src = user.photoURL || '';
+                document.getElementById('authName').textContent = user.displayName || user.email;
+            } else {
+                document.getElementById('btnSignIn').style.display = 'flex';
+                document.getElementById('authUserInfo').style.display = 'none';
+            }
+        });
+
+        function signIn() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider).catch(e => console.warn('Connexion annulée', e));
+        }
+
+        function signOut() {
+            auth.signOut();
+        }
+
+        function showAuthToast() {
+            const toast = document.getElementById('authToast');
+            toast.classList.add('show');
+            const btn = document.getElementById('btnSignIn');
+            btn.classList.add('pulse');
+            setTimeout(() => { toast.classList.remove('show'); btn.classList.remove('pulse'); }, 2500);
+        }
+
         function debouncedSave() {
             clearTimeout(saveTimer);
             saveTimer = setTimeout(pushState, 600);
@@ -2830,22 +2919,22 @@
 
         async function loadState() {
             try {
-                const res = await fetch(FIREBASE_URL);
+                const res = await fetch(DB_URL);
                 if (!res.ok) return;
                 const data = await res.json();
                 if (data && Array.isArray(data.checked)) applyChecked(data.checked);
             } catch (e) {
-                console.warn('Firebase non configuré — mode hors-ligne', e);
+                console.warn('Erreur lecture Firebase', e);
             }
         }
 
         async function pushState() {
+            if (!currentUser) return;
+            const token = await currentUser.getIdToken();
             const checked = [];
-            document.querySelectorAll('[data-cbid].checked').forEach(el => {
-                checked.push(el.dataset.cbid);
-            });
+            document.querySelectorAll('[data-cbid].checked').forEach(el => checked.push(el.dataset.cbid));
             try {
-                await fetch(FIREBASE_URL, {
+                await fetch(DB_URL + '?auth=' + token, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ checked: checked, updatedAt: new Date().toISOString() })
@@ -2855,8 +2944,9 @@
             }
         }
 
-        // Toggle Task
+        // Toggle Task — requiert auth
         function toggleTask(checkbox) {
+            if (!currentUser) { showAuthToast(); return; }
             checkbox.classList.toggle('checked');
             const status = checkbox.closest('.task-item').querySelector('.task-status');
             if (checkbox.classList.contains('checked')) {
@@ -2872,8 +2962,9 @@
             updateProgress();
         }
 
-        // Toggle Checklist
+        // Toggle Checklist — requiert auth
         function toggleCheck(checkbox) {
+            if (!currentUser) { showAuthToast(); return; }
             checkbox.classList.toggle('checked');
             const item = checkbox.closest('.checklist-item');
             if (checkbox.classList.contains('checked')) {
