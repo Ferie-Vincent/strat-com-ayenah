@@ -2778,7 +2778,18 @@
         }
 
         // === PERSISTENCE — localStorage ===
-        const STORAGE_KEY = 'psc-ayenah-progress';
+        // ================================================================
+        // FIREBASE CONFIG — remplace l'URL par ton projet Firebase
+        // Format : https://TON-PROJET-default-rtdb.firebaseio.com
+        // ================================================================
+        const FIREBASE_URL = 'REMPLACER_PAR_TON_URL_FIREBASE/psc-progress.json';
+
+        // Debounce : évite de spammer Firebase sur clics rapides
+        let saveTimer = null;
+        function debouncedSave() {
+            clearTimeout(saveTimer);
+            saveTimer = setTimeout(pushState, 600);
+        }
 
         function setCheckIcon(el) {
             el.textContent = '';
@@ -2800,18 +2811,8 @@
             });
         }
 
-        function saveState() {
-            const checked = [];
-            document.querySelectorAll('[data-cbid].checked').forEach(el => {
-                checked.push(el.dataset.cbid);
-            });
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(checked));
-        }
-
-        function loadState() {
-            const raw = localStorage.getItem(STORAGE_KEY);
-            if (!raw) return;
-            JSON.parse(raw).forEach(id => {
+        function applyChecked(ids) {
+            ids.forEach(id => {
                 const el = document.querySelector('[data-cbid="' + id + '"]');
                 if (!el) return;
                 el.classList.add('checked');
@@ -2827,6 +2828,33 @@
             document.querySelectorAll('.checklist-card').forEach(card => updateChecklistCount(card));
         }
 
+        async function loadState() {
+            try {
+                const res = await fetch(FIREBASE_URL);
+                if (!res.ok) return;
+                const data = await res.json();
+                if (data && Array.isArray(data.checked)) applyChecked(data.checked);
+            } catch (e) {
+                console.warn('Firebase non configuré — mode hors-ligne', e);
+            }
+        }
+
+        async function pushState() {
+            const checked = [];
+            document.querySelectorAll('[data-cbid].checked').forEach(el => {
+                checked.push(el.dataset.cbid);
+            });
+            try {
+                await fetch(FIREBASE_URL, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ checked: checked, updatedAt: new Date().toISOString() })
+                });
+            } catch (e) {
+                console.warn('Erreur sauvegarde Firebase', e);
+            }
+        }
+
         // Toggle Task
         function toggleTask(checkbox) {
             checkbox.classList.toggle('checked');
@@ -2840,7 +2868,7 @@
                 status.className = 'task-status pending';
                 status.textContent = 'En attente';
             }
-            saveState();
+            debouncedSave();
             updateProgress();
         }
 
@@ -2855,7 +2883,7 @@
                 clearCheckIcon(checkbox);
                 item.classList.remove('completed');
             }
-            saveState();
+            debouncedSave();
             updateChecklistCount(checkbox.closest('.checklist-card'));
         }
 
@@ -2875,19 +2903,16 @@
             const completed = doneTasks.length + doneChecks.length;
             const percentage = Math.round((completed / total) * 100);
 
-            // Progress circle (green on white topbar)
             const progressCircle = document.getElementById('globalProgress');
             progressCircle.style.background =
                 `conic-gradient(#1B8C4E ${percentage}%, #e3ebe6 ${percentage}%)`;
             progressCircle.querySelector('span').textContent = `${percentage}%`;
 
-            // Stat widgets
             const statDone    = document.getElementById('statDone');
             const statPending = document.getElementById('statPending');
             if (statDone)    statDone.textContent    = completed;
             if (statPending) statPending.textContent = total - completed;
 
-            // Domain progress bars
             document.querySelectorAll('.domain-group').forEach(domain => {
                 const t = domain.querySelectorAll('.task-checkbox').length;
                 const c = domain.querySelectorAll('.task-checkbox.checked').length;
@@ -2899,8 +2924,7 @@
 
         // Initialize
         assignIds();
-        loadState();
-        updateProgress();
+        loadState().then(() => updateProgress());
     </script>
 </body>
 </html>
